@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface OptionsRepository extends JpaRepository<Options, Long> {
 
-    @Query("select o from Options o where o.question.id=?1")
-    List<Options> findAllOptionsByQuestionsId(Long questionId);
+    @Query("select o from Options o where o.questions.id=?1")
+    List<Options> findAllOptionsByQuestionId(Long questionId);
 }
