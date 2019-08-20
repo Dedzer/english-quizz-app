@@ -1,8 +1,7 @@
 package com.dedzer.englishQuizz.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Test {
@@ -11,8 +10,17 @@ public class Test {
     @GeneratedValue
     private Long id;
     private String name;
-
+    @OneToMany(mappedBy = "test", cascade = CascadeType.PERSIST)
+    private List<Task> tasks;
     public Test() {
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Long getId() {

@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Questions {
@@ -13,8 +14,17 @@ public class Questions {
     private Task task;
     private String question;
     private String answer;
-
+    @OneToMany(mappedBy = "questions", cascade = CascadeType.PERSIST)
+    private List<Options> optionsList;
     public Questions() {
+    }
+
+    public List<Options> getOptionsList() {
+        return optionsList;
+    }
+
+    public void setOptionsList(List<Options> optionsList) {
+        this.optionsList = optionsList;
     }
 
     public Long getId() {
