@@ -7,7 +7,7 @@ import java.util.List;
 public class Test {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @OneToMany(mappedBy = "test", cascade = CascadeType.PERSIST)

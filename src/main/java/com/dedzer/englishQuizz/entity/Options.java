@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 public class Options {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "question_id")
