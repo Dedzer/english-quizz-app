@@ -1,5 +1,6 @@
 package com.dedzer.englishQuizz.controller;
 
+import com.dedzer.englishQuizz.service.TestService;
 import com.dedzer.englishQuizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,9 +12,13 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private TestService testService;
 
     @GetMapping("/index")
     public ModelAndView index(){
-        return new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("testList", testService.getAllTests());
+        return modelAndView;
     }
 }
