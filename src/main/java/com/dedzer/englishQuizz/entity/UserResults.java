@@ -3,6 +3,7 @@ package com.dedzer.englishQuizz.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user_results")
 public class UserResults {
 
     @Id
@@ -14,7 +15,7 @@ public class UserResults {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
     private User user;
-    @JoinColumn(name = "achieved_points")
+    @Column(name = "achieved_points")
     private Integer achievedPoints;
 
     public UserResults() {

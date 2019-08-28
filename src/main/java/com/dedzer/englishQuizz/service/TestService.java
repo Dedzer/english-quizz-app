@@ -17,4 +17,8 @@ public class TestService {
     public List<Test> getAllTests(){
         return testRepository.findAll();
     }
+
+    public Test getTestById(Long id){
+        return testRepository.findOne(id);
+    }
 }

@@ -19,14 +19,6 @@ public class Questions {
     public Questions() {
     }
 
-    public List<Options> getOptionsList() {
-        return optionsList;
-    }
-
-    public void setOptionsList(List<Options> optionsList) {
-        this.optionsList = optionsList;
-    }
-
     public Long getId() {
         return id;
     }
@@ -57,5 +49,13 @@ public class Questions {
 
     public void setAnswer(String answer) {
         this.answer = answer;
+    }
+
+    public List<Options> getOptionsList() {
+        return optionsList;
+    }
+
+    public void setOptionsList(List<Options> optionsList) {
+        this.optionsList = optionsList;
     }
 }

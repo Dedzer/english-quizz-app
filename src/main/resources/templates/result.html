@@ -18,12 +18,12 @@
             <li><a href="#">Page 1</a></li>
             <li><a href="/myprofile">My Profile</a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">Tests
+                <a class="dropdown-toggle" data-toggle="dropdown" >Tests
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                        <li th:each="test : ${testList}">
-                            <a th:href="@{/test(id=${test.id})}" th:text="${test.name}" th:value="${test.name}"></a>
-                        </li>
+                    <li th:each="test : ${testList}">
+                        <a th:href="@{/test(id=${test.id})}" th:text="${test.name}" th:value="${test.name}"></a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -32,7 +32,33 @@
         </ul>
     </div>
 </nav>
+<div class="container">
+    <table>
+        <tbody>
+        <tr th:each="map : ${resultMap}">
+            <td th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
+            <td th:if="${map.value == true}">
+                <i class="fas fa-thumbs-up"></i>
+            </td>
+            <td th:if="${map.value == false}">
+                <i class="fas fa-thumbs-down"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p th:text="${achievedPoints + ' / ' + resultMap.size()}"></p>
+</div>
+<style>
+.fa-thumbs-up{
+  color: green;
+}
+.fa-thumbs-down {
+  color: red;
+}
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
 </body>
 </html>

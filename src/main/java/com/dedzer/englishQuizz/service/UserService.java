@@ -28,6 +28,6 @@ public class UserService {
     }
 
     public User getCurrentUser(){
-        return userRepository.findUserByLogin(getCurrentLogin()).get();
+        return userRepository.findUserByLogin(getCurrentLogin());
     }
 }
