@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.service;
 
 
+import com.dedzer.englishQuizz.entity.User;
 import com.dedzer.englishQuizz.entity.UserResults;
 import com.dedzer.englishQuizz.repository.UserResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +25,12 @@ public class UserResultsService {
         this.testService = testService;
     }
 
-    public Map<Long,Boolean> getResult(List<Long> questionId, List<String> userAnswers){
+    public Map<Long, Boolean> getResult(List<Long> questionId, List<String> userAnswers) {
         Map<Long, Boolean> userResult = new LinkedHashMap<>();
-        for (int i = 0; i < questionId.size(); i++){
-            String []answer = questionsService.findQuestionById(questionId.get(i)).getAnswer().toLowerCase().split("[^a-zA-Z']+");
-            String []userAnswer = userAnswers.get(i).toLowerCase().split("[^a-zA-Z']+");
-            if(Arrays.equals(answer, userAnswer)){
+        for (int i = 0; i < questionId.size(); i++) {
+            String[] answer = questionsService.findQuestionById(questionId.get(i)).getAnswer().toLowerCase().split("[^a-zA-Z']+");
+            String[] userAnswer = userAnswers.get(i).toLowerCase().split("[^a-zA-Z']+");
+            if (Arrays.equals(answer, userAnswer)) {
                 userResult.put(questionId.get(i), true);
             } else {
                 userResult.put(questionId.get(i), false);
@@ -38,10 +39,10 @@ public class UserResultsService {
         return userResult;
     }
 
-    public Integer achievedPoints(Long testId, Map<Long, Boolean> userResult){
+    public Integer achievedPoints(Long testId, Map<Long, Boolean> userResult) {
         int points = 0;
-        for(Map.Entry<Long, Boolean> entry : userResult.entrySet()){
-            if (entry.getValue().equals(true)){
+        for (Map.Entry<Long, Boolean> entry : userResult.entrySet()) {
+            if (entry.getValue().equals(true)) {
                 points++;
             }
         }
@@ -51,5 +52,9 @@ public class UserResultsService {
         userResults.setTest(testService.getTestById(testId));
         userResultsRepository.save(userResults);
         return points;
+    }
+
+    public List<UserResults> getUserResultsByCurrentUserId() {
+        return userResultsRepository.findAllUserResultsByUserId(userService.getCurrentUser().getId());
     }
 }
