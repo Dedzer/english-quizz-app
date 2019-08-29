@@ -32,15 +32,15 @@
     </div>
 </nav>
 <div class="container">
-    <table>
+    <table >
         <thead>
         <th>Test</th>
         <th>Points</th>
         </thead>
         <tbody>
         <tr th:each="userResult : ${userResultsList}">
-            <td th:text="${userResult.getTest().getName()}"></td>
-            <td th:text="${userResult.getAchievedPoints()}"></td>
+            <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getName()}"></td>
+            <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAchievedPoints()}"></td>
         </tr>
         </tbody>
     </table>

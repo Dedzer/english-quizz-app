@@ -32,20 +32,22 @@
     </div>
 </nav>
 <div class="container">
-    <table>
+    <table >
         <tbody>
         <tr th:each="map : ${resultMap}">
-            <td th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
-            <td th:if="${map.value == true}">
+            <td style="margin: 10px; padding: 5px;" th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
+            <td style="margin: 10px; padding: 5px;" th:if="${map.value == true}">
                 <i class="fas fa-thumbs-up"></i>
             </td>
-            <td th:if="${map.value == false}">
+            <td style="margin: 10px; padding: 5px;" th:if="${map.value == false}">
                 <i class="fas fa-thumbs-down"></i>
             </td>
         </tr>
         </tbody>
     </table>
-    <p th:text="${achievedPoints + ' / ' + resultMap.size()}"></p>
+    <div style="width:800px; margin:0 auto;">
+        <p  class="text-success" th:text="${'Your result is:  ' + achievedPoints + ' / ' + resultMap.size()}"></p>
+    </div>
 </div>
 <style>
 .fa-thumbs-up{
@@ -54,7 +56,6 @@
 .fa-thumbs-down {
   color: red;
 }
-
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
