@@ -10,7 +10,8 @@ public class Test {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String url;
+    @Column(name = "video_url")
+    private String videoUrl;
     @OneToMany(mappedBy = "test", cascade = CascadeType.PERSIST)
     private List<Task> tasks;
     public Test() {
@@ -32,12 +33,12 @@ public class Test {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public List<Task> getTasks() {

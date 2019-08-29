@@ -41,19 +41,19 @@
 
                 <ol type="1">
 
-                    <li th:each="question: ${task.questionsList}"><h4 th:text="${question.question}"></h4>
+                    <li th:each="question: ${task.questionsSet}"><h4 th:text="${question.question}"></h4>
 
                         <input type="hidden" name="questionId" th:value="${question.id}"/>
-                        <ul th:if="${question.optionsList.isEmpty()}">
+                        <ul th:if="${question.optionsSet.isEmpty()}">
                             <li>
                                 <input type="text" th:field="*{answer}"/>
                             </li>
                         </ul>
-                        <ul th:if="${!question.optionsList.isEmpty()}">
+                        <ul th:if="${!question.optionsSet.isEmpty()}">
                             <li >
 
                                 <select th:field="*{answer}">
-                                    <option th:each="option: ${question.optionsList}" th:value="${option.option}" th:text="${option.option}"></option>
+                                    <option th:each="option: ${question.optionsSet}" th:value="${option.option}" th:text="${option.option}"></option>
                                 </select>
 
                             </li>
