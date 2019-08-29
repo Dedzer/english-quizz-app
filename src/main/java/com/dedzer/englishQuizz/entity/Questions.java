@@ -17,6 +17,7 @@ public class Questions {
     private String answer;
     @OneToMany(mappedBy = "questions", cascade = CascadeType.PERSIST)
     private Set<Options> optionsSet;
+
     public Questions() {
     }
 

@@ -33,7 +33,7 @@ public class TestController {
     }
 
     @GetMapping("/test")
-    public ModelAndView getTest(@RequestParam Long id){
+    public ModelAndView getTest(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("test");
         modelAndView.addObject("testList", testService.getAllTests());
         modelAndView.addObject("getTest", testService.getTestById(id));
@@ -43,7 +43,7 @@ public class TestController {
     }
 
     @PostMapping("/result-process")
-    public ModelAndView userResult(@ModelAttribute("userAnswers") UserAnswers userAnswers){
+    public ModelAndView userResult(@ModelAttribute("userAnswers") UserAnswers userAnswers) {
         ModelAndView modelAndView = new ModelAndView("result");
         Map<Long, Boolean> resultMap = userResultsService.getResult(userAnswers.getQuestionId(), userAnswers.getAnswer());
         modelAndView.addObject("testList", testService.getAllTests());

@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @RequestMapping(value = "/login")
-    public String loginPage(){
+    public String loginPage() {
         return "login";
     }
 
     @RequestMapping("/register")
-    public String registerPage(){
+    public String registerPage() {
         return "register";
     }
 }

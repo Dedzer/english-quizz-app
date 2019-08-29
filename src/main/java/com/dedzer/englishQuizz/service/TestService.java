@@ -14,11 +14,11 @@ public class TestService {
     private TestRepository testRepository;
 
 
-    public List<Test> getAllTests(){
+    public List<Test> getAllTests() {
         return testRepository.findAll();
     }
 
-    public Test getTestById(Long id){
+    public Test getTestById(Long id) {
         return testRepository.findOne(id);
     }
 }

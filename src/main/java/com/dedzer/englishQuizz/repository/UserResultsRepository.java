@@ -1,4 +1,5 @@
 package com.dedzer.englishQuizz.repository;
+
 ;
 import com.dedzer.englishQuizz.entity.UserResults;
 import org.springframework.data.jpa.repository.JpaRepository;

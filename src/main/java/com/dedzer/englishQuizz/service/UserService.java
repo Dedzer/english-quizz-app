@@ -16,18 +16,18 @@ public class UserService {
     @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
 
-    public void addUser(User user){
+    public void addUser(User user) {
         user.setRole("ROLE_USER");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    private String getCurrentLogin(){
+    private String getCurrentLogin() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
 
-    public User getCurrentUser(){
+    public User getCurrentUser() {
         return userRepository.findUserByLogin(getCurrentLogin());
     }
 }

@@ -14,6 +14,7 @@ public class Test {
     private String videoUrl;
     @OneToMany(mappedBy = "test", cascade = CascadeType.PERSIST)
     private List<Task> tasks;
+
     public Test() {
     }
 

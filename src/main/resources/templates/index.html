@@ -20,9 +20,9 @@
                 <a class="dropdown-toggle" data-toggle="dropdown">Tests
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                        <li th:each="test : ${testList}">
-                            <a th:href="@{/test(id=${test.id})}" th:text="${test.name}" th:value="${test.name}"></a>
-                        </li>
+                    <li th:each="test : ${testList}">
+                        <a th:href="@{/test(id=${test.id})}" th:text="${test.name}" th:value="${test.name}"></a>
+                    </li>
                 </ul>
             </li>
         </ul>

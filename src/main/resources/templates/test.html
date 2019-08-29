@@ -18,7 +18,7 @@
             <li class="active"><a href="#">Home</a></li>
             <li><a href="/myprofile">My profile</a></li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" >Tests
+                <a class="dropdown-toggle" data-toggle="dropdown">Tests
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li th:each="test : ${testList}">
@@ -34,9 +34,14 @@
 </nav>
 
 <div class="container">
+    <div style="width:800px; margin:0 auto;">
+        <iframe width="560" height="315" th:src="${getTest.videoUrl}" frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen="1"></iframe>
+    </div>
     <ul>
         <form class="allForms" method="post" th:action="@{result-process}" th:object="${userAnswers}">
-            <input type="hidden" name="testId" th:value="${getTest.id}" />
+            <input type="hidden" name="testId" th:value="${getTest.id}"/>
             <li th:each="task: ${taskList}"><h3 th:text="${task.name}"></h3>
 
                 <ol type="1">
@@ -50,10 +55,11 @@
                             </li>
                         </ul>
                         <ul th:if="${!question.optionsSet.isEmpty()}">
-                            <li >
+                            <li>
 
                                 <select th:field="*{answer}">
-                                    <option th:each="option: ${question.optionsSet}" th:value="${option.option}" th:text="${option.option}"></option>
+                                    <option th:each="option: ${question.optionsSet}" th:value="${option.option}"
+                                            th:text="${option.option}"></option>
                                 </select>
 
                             </li>

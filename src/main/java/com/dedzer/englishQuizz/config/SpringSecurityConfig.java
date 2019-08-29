@@ -38,12 +38,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user")
-                    .password(bCryptPasswordEncoder.encode("password"))
-                    .roles("USER")
+                .password(bCryptPasswordEncoder.encode("password"))
+                .roles("USER")
                 .and()
                 .withUser("admin")
-                    .password(bCryptPasswordEncoder.encode("password"))
-                    .roles("ADMIN")
+                .password(bCryptPasswordEncoder.encode("password"))
+                .roles("ADMIN")
                 .and()
                 .passwordEncoder(bCryptPasswordEncoder);
         auth.jdbcAuthentication()

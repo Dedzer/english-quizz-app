@@ -16,6 +16,7 @@ public class Task {
     private String name;
     @OneToMany(mappedBy = "task", cascade = CascadeType.PERSIST)
     private Set<Questions> questionsSet;
+
     public Task() {
     }
 

@@ -34,14 +34,14 @@
 <div class="container">
     <table>
         <thead>
-            <th>Test</th>
-            <th>Points</th>
+        <th>Test</th>
+        <th>Points</th>
         </thead>
         <tbody>
-            <tr th:each="userResult : ${userResultsList}">
-                <td th:text="${userResult.getTest().getName()}"></td>
-                <td th:text="${userResult.getAchievedPoints()}"></td>
-            </tr>
+        <tr th:each="userResult : ${userResultsList}">
+            <td th:text="${userResult.getTest().getName()}"></td>
+            <td th:text="${userResult.getAchievedPoints()}"></td>
+        </tr>
         </tbody>
     </table>
 </div>

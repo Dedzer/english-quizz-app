@@ -2,9 +2,9 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <title>sign up!</title>
 </head>
 <body>
@@ -13,14 +13,16 @@
     <form th:action="@{/register-process}" method="post">
         <div class="form-group">
             <label for="inputLogin">Login:</label>
-            <input class="form-control" type="text"  id="inputLogin" placeholder="Enter login" th:required="required" name="login" />
+            <input class="form-control" type="text" id="inputLogin" placeholder="Enter login" th:required="required"
+                   name="login"/>
         </div>
         <div class="form-group">
             <label for="inputPassword">Password:</label>
-            <input class="form-control" type="password" id="inputPassword" placeholder="Enter password" th:required="required" name="password" />
+            <input class="form-control" type="password" id="inputPassword" placeholder="Enter password"
+                   th:required="required" name="password"/>
             <p class="alert alert-danger" th:if="${param.error}" th:text="'login or password is not correct'"></p>
         </div>
-        <button type="reset" class="btn btn-light"> Reset </button>
+        <button type="reset" class="btn btn-light"> Reset</button>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

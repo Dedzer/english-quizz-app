@@ -26,18 +26,18 @@ public class UserController {
     }
 
     @GetMapping("/register")
-    public ModelAndView registerPage(){
+    public ModelAndView registerPage() {
         return new ModelAndView("register", "UserToInsert", new User());
     }
 
     @PostMapping("/register-process")
-    public String addNewUser(@ModelAttribute User user){
+    public String addNewUser(@ModelAttribute User user) {
         userService.addUser(user);
         return "redirect:login";
     }
 
     @GetMapping("/myprofile")
-    public ModelAndView myProfilePage(){
+    public ModelAndView myProfilePage() {
         ModelAndView modelAndView = new ModelAndView("myprofile");
         modelAndView.addObject("userResultsList", userResultsService.getUserResultsByCurrentUserId());
         modelAndView.addObject("testList", testService.getAllTests());

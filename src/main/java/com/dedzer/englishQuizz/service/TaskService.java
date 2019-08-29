@@ -16,7 +16,7 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public List<Task> getTaskByTestId(Long id){
+    public List<Task> getTaskByTestId(Long id) {
         return taskRepository.findAllTaskByTestId(id);
     }
 
