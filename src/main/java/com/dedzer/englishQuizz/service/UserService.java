@@ -35,4 +35,12 @@ public class UserService {
     public Optional<User> getUserByLogin(String login){
         return userRepository.findUserByLogin(login);
     }
+
+    public void changePassword(User user){
+        if(bCryptPasswordEncoder.matches(user.getOldPassword(), getCurrentUser().getPassword())){
+            if(user.getPassword().equals(user.getConfirmPassword())){
+                userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
+            }
+        }
+    }
 }

@@ -49,4 +49,11 @@ public class UserController {
         modelAndView.addObject("testList", testService.getAllTests());
         return modelAndView;
     }
+
+    @PostMapping("/change-password")
+    public ModelAndView changePassword(@ModelAttribute User user){
+        ModelAndView modelAndView = new ModelAndView("myprofile");
+        userService.changePassword(user);
+        return modelAndView;
+    }
 }
