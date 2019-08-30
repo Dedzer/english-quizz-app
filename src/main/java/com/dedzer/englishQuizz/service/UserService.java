@@ -8,6 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -28,6 +30,9 @@ public class UserService {
     }
 
     public User getCurrentUser() {
-        return userRepository.findUserByLogin(getCurrentLogin());
+        return userRepository.findUserByLogin(getCurrentLogin()).get();
+    }
+    public Optional<User> getUserByLogin(String login){
+        return userRepository.findUserByLogin(login);
     }
 }

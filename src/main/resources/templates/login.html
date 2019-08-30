@@ -11,6 +11,11 @@
 <body>
 
 <div class="container">
+    <div th:if="${param.logout}">
+        <div class="alert alert-info">
+            You have been logged out.
+        </div>
+    </div>
     <form th:action="@{/login-process}" method="post">
         <div class="form-group">
             <label for="inputLogin">Login:</label>

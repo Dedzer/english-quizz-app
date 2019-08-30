@@ -22,6 +22,11 @@
                    th:required="required" name="password"/>
             <p class="alert alert-danger" th:if="${param.error}" th:text="'login or password is not correct'"></p>
         </div>
+        <div class="form-group">
+            <label for="inputConfirmPassword">Confirm Password:</label>
+            <input class="form-control" type="password" id="inputConfirmPassword" placeholder="Enter password"
+                   th:required="required" name="confirmPassword"/>
+        </div>
         <button type="reset" class="btn btn-light"> Reset</button>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

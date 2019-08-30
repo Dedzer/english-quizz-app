@@ -31,9 +31,15 @@ public class UserController {
     }
 
     @PostMapping("/register-process")
-    public String addNewUser(@ModelAttribute User user) {
-        userService.addUser(user);
-        return "redirect:login";
+    public ModelAndView addNewUser(@ModelAttribute User user) {
+        ModelAndView modelAndView;
+        if(user.getPassword().equals(user.getConfirmPassword()) && !userService.getUserByLogin(user.getLogin()).isPresent()){
+            modelAndView = new ModelAndView("redirect:login");
+            userService.addUser(user);
+        } else {
+            modelAndView = new ModelAndView("redirect:register");
+        }
+        return modelAndView;
     }
 
     @GetMapping("/myprofile")
