@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -41,6 +42,20 @@ public class UserService {
             if(user.getPassword().equals(user.getConfirmPassword())){
                 userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
             }
+        }
+    }
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public void addAdmin(User user){
+        if(user.getRole().equals("ROLE_USER")){
+            userRepository.changeUserRole("ROLE_ADMIN", user.getId());
+        }
+    }
+    public void deleteAdmin(User user){
+        if(user.getRole().equals("ROLE_ADMIN")){
+            userRepository.changeUserRole("ROLE_USER", user.getId());
         }
     }
 }
