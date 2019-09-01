@@ -47,6 +47,7 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("myprofile");
         modelAndView.addObject("userResultsList", userResultsService.getUserResultsByCurrentUserId());
         modelAndView.addObject("testList", testService.getAllTests());
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         return modelAndView;
     }
 

@@ -2,10 +2,7 @@ package com.dedzer.englishQuizz.controller;
 
 
 import com.dedzer.englishQuizz.model.UserAnswers;
-import com.dedzer.englishQuizz.service.QuestionsService;
-import com.dedzer.englishQuizz.service.TaskService;
-import com.dedzer.englishQuizz.service.TestService;
-import com.dedzer.englishQuizz.service.UserResultsService;
+import com.dedzer.englishQuizz.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +20,15 @@ public class TestController {
     private TaskService taskService;
     private QuestionsService questionsService;
     private UserResultsService userResultsService;
+    private UserService userService;
 
     @Autowired
-    public TestController(TestService testService, TaskService taskService, QuestionsService questionsService, UserResultsService userResultsService) {
+    public TestController(TestService testService, TaskService taskService, QuestionsService questionsService, UserResultsService userResultsService, UserService userService) {
         this.testService = testService;
         this.taskService = taskService;
         this.questionsService = questionsService;
         this.userResultsService = userResultsService;
+        this.userService = userService;
     }
 
     @GetMapping("/test")
@@ -39,6 +38,7 @@ public class TestController {
         modelAndView.addObject("getTest", testService.getTestById(id));
         modelAndView.addObject("taskList", taskService.getTaskByTestId(id));
         modelAndView.addObject("userAnswers", new UserAnswers());
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         return modelAndView;
     }
 
@@ -50,6 +50,7 @@ public class TestController {
         modelAndView.addObject("getQuestion", questionsService);
         modelAndView.addObject("resultMap", resultMap);
         modelAndView.addObject("achievedPoints", userResultsService.achievedPoints(userAnswers.getTestId(), resultMap));
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         return modelAndView;
     }
 }

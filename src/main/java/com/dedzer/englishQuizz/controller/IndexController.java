@@ -19,6 +19,7 @@ public class IndexController {
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("testList", testService.getAllTests());
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         return modelAndView;
     }
 }
