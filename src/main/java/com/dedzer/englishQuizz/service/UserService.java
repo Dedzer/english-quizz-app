@@ -37,8 +37,8 @@ public class UserService {
         return userRepository.findUserByLogin(login);
     }
 
-    public void changePassword(User user){
-        if(bCryptPasswordEncoder.matches(user.getOldPassword(), getCurrentUser().getPassword())){
+    public void changePassword(User user, String oldPassword){
+        if(bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword())){
             if(user.getPassword().equals(user.getConfirmPassword())){
                 userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
             }

@@ -52,9 +52,9 @@ public class UserController {
     }
 
     @PostMapping("/change-password")
-    public ModelAndView changePassword(@ModelAttribute User user){
+    public ModelAndView changePassword(@ModelAttribute User user, @ModelAttribute("oldPassword") String oldPassword){
         ModelAndView modelAndView = new ModelAndView("myprofile");
-        userService.changePassword(user);
+        userService.changePassword(user, oldPassword);
         return modelAndView;
     }
 }
