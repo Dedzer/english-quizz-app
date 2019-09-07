@@ -7,6 +7,7 @@ import com.dedzer.englishQuizz.repository.UserResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 @Service
@@ -46,12 +47,18 @@ public class UserResultsService {
                 points++;
             }
         }
+        saveResults(testId, points);
+        return points;
+    }
+
+    public void saveResults(long testId, int points){
+        Timestamp stamp = new Timestamp(System.currentTimeMillis());
+        Date date = new Date(stamp.getTime());
         UserResults userResults = new UserResults();
         userResults.setAchievedPoints(points);
         userResults.setUser(userService.getCurrentUser());
         userResults.setTest(testService.getTestById(testId));
         userResultsRepository.save(userResults);
-        return points;
     }
 
     public List<UserResults> getUserResultsByCurrentUserId() {

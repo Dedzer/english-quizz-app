@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_results")
@@ -17,6 +18,8 @@ public class UserResults {
     private User user;
     @Column(name = "achieved_points")
     private Integer achievedPoints;
+    @Column(name = "accomplished_date")
+    private Date accomplishedDate;
 
     public UserResults() {
     }
@@ -51,5 +54,13 @@ public class UserResults {
 
     public void setAchievedPoints(Integer achievedPoints) {
         this.achievedPoints = achievedPoints;
+    }
+
+    public Date getAccomplishedDate() {
+        return accomplishedDate;
+    }
+
+    public void setAccomplishedDate(Date accomplishedDate) {
+        this.accomplishedDate = accomplishedDate;
     }
 }
