@@ -14,6 +14,8 @@ public class User {
     @Transient
     private String confirmPassword;
     private String role;
+    @OneToOne
+    private UserDetails userDetails;
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<UserResults> userResults;
 
@@ -54,6 +56,14 @@ public class User {
 
     public String getConfirmPassword() {
         return confirmPassword;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     public void setConfirmPassword(String confirmPassword) {
