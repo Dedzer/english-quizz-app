@@ -55,6 +55,7 @@ public class UserResultsService {
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         Date date = new Date(stamp.getTime());
         UserResults userResults = new UserResults();
+        userResults.setAccomplishedDate(date);
         userResults.setAchievedPoints(points);
         userResults.setUser(userService.getCurrentUser());
         userResults.setTest(testService.getTestById(testId));
