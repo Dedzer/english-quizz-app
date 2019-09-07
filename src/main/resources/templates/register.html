@@ -10,22 +10,36 @@
 <body>
 
 <div class="container">
-    <form th:action="@{/register-process}" method="post">
+    <form th:action="@{/register-process}" method="post" >
         <div class="form-group">
             <label for="inputLogin">Login:</label>
             <input class="form-control" type="text" id="inputLogin" placeholder="Enter login" th:required="required"
-                   name="login"/>
+                   th:field="*{UserToInsert.login}"/>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">Email:</label>
+            <input class="form-control" type="email" id="inputEmail" placeholder="Enter email" th:required="required"
+                   th:field="*{UserToInsert.userDetails.email}"/>
+        </div>
+        <div class="form-group">
+            <label for="inputFirstName">First Name:</label>
+            <input class="form-control" type="text" id="inputFirstName" placeholder="Enter first name" th:required="required"
+                   th:field="*{UserToInsert.userDetails.firstName}"/>
+        </div>
+        <div class="form-group">
+            <label for="inputLastName">Last Name:</label>
+            <input class="form-control" type="text" id="inputLastName" placeholder="Enter last name" th:required="required"
+                   th:field="*{UserToInsert.userDetails.lastName}"/>
         </div>
         <div class="form-group">
             <label for="inputPassword">Password:</label>
             <input class="form-control" type="password" id="inputPassword" placeholder="Enter password"
-                   th:required="required" name="password"/>
-            <p class="alert alert-danger" th:if="${param.error}" th:text="'login or password is not correct'"></p>
+                   th:required="required" th:field="*{UserToInsert.password}"/>
         </div>
         <div class="form-group">
             <label for="inputConfirmPassword">Confirm Password:</label>
             <input class="form-control" type="password" id="inputConfirmPassword" placeholder="Enter password"
-                   th:required="required" name="confirmPassword"/>
+                   th:required="required" th:field="*{UserToInsert.confirmPassword}"/>
         </div>
         <button type="reset" class="btn btn-light"> Reset</button>
         <button type="submit" class="btn btn-primary">Submit</button>

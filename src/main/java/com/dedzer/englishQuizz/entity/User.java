@@ -14,7 +14,8 @@ public class User {
     @Transient
     private String confirmPassword;
     private String role;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_details_id")
     private UserDetails userDetails;
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<UserResults> userResults;

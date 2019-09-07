@@ -3,6 +3,7 @@ package com.dedzer.englishQuizz.entity;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user_details")
 public class UserDetails {
 
     @Id
@@ -13,8 +14,6 @@ public class UserDetails {
     private String firstName;
     @JoinColumn(name = "last_name")
     private String lastName;
-    @OneToOne
-    private User user;
 
     public UserDetails() {
     }
@@ -51,11 +50,4 @@ public class UserDetails {
         this.lastName = lastName;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

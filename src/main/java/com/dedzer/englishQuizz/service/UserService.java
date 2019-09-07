@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.service;
 
 import com.dedzer.englishQuizz.entity.User;
+import com.dedzer.englishQuizz.entity.UserDetails;
 import com.dedzer.englishQuizz.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,10 +19,13 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     public void addUser(User user) {
         user.setRole("ROLE_USER");
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDetailsService.saveUserDetails(user.getUserDetails());
         userRepository.save(user);
     }
 
