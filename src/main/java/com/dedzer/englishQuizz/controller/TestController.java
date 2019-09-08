@@ -57,6 +57,7 @@ public class TestController {
         modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
         modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
         modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
+        modelAndView.addObject("getTestId", userAnswers.getTestId());
         return modelAndView;
     }
 }

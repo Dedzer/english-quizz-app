@@ -70,6 +70,7 @@
     <div style="width:800px; margin:0 auto;">
         <p  class="text-success" th:text="${'Your result is:  ' + achievedPoints + ' / ' + resultMap.size()}"></p>
     </div>
+    <a class="w3-button w3-white w3-border w3-border-green w3-round-large" role="button" th:href="@{/test(id=${getTestId})}">Once again?</a>
 </div>
 <style>
 .fa-thumbs-up{
