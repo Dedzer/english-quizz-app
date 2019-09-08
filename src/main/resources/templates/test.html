@@ -80,6 +80,7 @@
                             <li>
 
                                 <select th:field="*{answer}">
+                                    <option value="" selected="selected">Choose here</option>
                                     <option th:each="option: ${question.optionsSet}" th:value="${option.option}"
                                             th:text="${option.option}"></option>
                                 </select>
