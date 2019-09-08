@@ -26,24 +26,30 @@
                         <button class="w3-button w3-white w3-round-large">Grammar</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getGrammar.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}" th:href="@{/test(id=${grammarTest.id})}"
-                               th:text="${grammarTest.name + ' ' + grammarTest.level}" th:value="${grammarTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}"
+                               th:href="@{/test(id=${grammarTest.id})}"
+                               th:text="${grammarTest.name + ' ' + grammarTest.level}"
+                               th:value="${grammarTest.name}"></a>
                         </div>
                     </div>
                     <div class="w3-dropdown-hover">
                         <button class="w3-button w3-white w3-round-large">Reading</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getReading.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}" th:href="@{/test(id=${readingTest.id})}"
-                               th:text="${readingTest.name + ' ' + readingTest.level}" th:value="${readingTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}"
+                               th:href="@{/test(id=${readingTest.id})}"
+                               th:text="${readingTest.name + ' ' + readingTest.level}"
+                               th:value="${readingTest.name}"></a>
                         </div>
                     </div>
                     <div class="w3-dropdown-hover">
                         <button class="w3-button w3-white w3-round-large">Listening</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getListening.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}" th:href="@{/test(id=${listeningTest.id})}"
-                               th:text="${listeningTest.name + ' ' + listeningTest.level}" th:value="${listeningTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}"
+                               th:href="@{/test(id=${listeningTest.id})}"
+                               th:text="${listeningTest.name + ' ' + listeningTest.level}"
+                               th:value="${listeningTest.name}"></a>
                         </div>
                     </div>
                 </ul>
@@ -62,14 +68,12 @@
                 allowfullscreen="1"></iframe>
     </div>
     <ul>
-        <form onsubmit="return confirm('Do you really want to submit the answers?');" method="post" th:action="@{result-process}" th:object="${userAnswers}">
+        <form onsubmit="return confirm('Do you really want to submit the answers?');" method="post"
+              th:action="@{result-process}" th:object="${userAnswers}">
             <input type="hidden" name="testId" th:value="${getTest.id}"/>
             <li th:each="task: ${taskList}"><h3 th:text="${task.name}"></h3>
-
                 <ol type="1">
-
                     <li th:each="question: ${task.questionsSet}"><h4 th:text="${question.question}"></h4>
-
                         <input type="hidden" name="questionId" th:value="${question.id}"/>
                         <ul th:if="${question.optionsSet.isEmpty()}">
                             <li>
@@ -78,24 +82,17 @@
                         </ul>
                         <ul th:if="${!question.optionsSet.isEmpty()}">
                             <li>
-
                                 <select th:field="*{answer}">
                                     <option value="" selected="selected">Choose here</option>
                                     <option th:each="option: ${question.optionsSet}" th:value="${option.option}"
                                             th:text="${option.option}"></option>
                                 </select>
-
                             </li>
-
                         </ul>
-
                     </li>
-
                 </ol>
-
             </li>
-
-            <button type="submit"  class="btn btn-info">Submit</button>
+            <button type="submit" class="btn btn-info">Submit</button>
         </form>
     </ul>
 </div>

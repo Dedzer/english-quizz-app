@@ -25,24 +25,30 @@
                         <button class="w3-button w3-white w3-round-large">Grammar</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getGrammar.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}" th:href="@{/test(id=${grammarTest.id})}"
-                               th:text="${grammarTest.name + ' ' + grammarTest.level}" th:value="${grammarTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}"
+                               th:href="@{/test(id=${grammarTest.id})}"
+                               th:text="${grammarTest.name + ' ' + grammarTest.level}"
+                               th:value="${grammarTest.name}"></a>
                         </div>
                     </div>
                     <div class="w3-dropdown-hover">
                         <button class="w3-button w3-white w3-round-large">Reading</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getReading.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}" th:href="@{/test(id=${readingTest.id})}"
-                               th:text="${readingTest.name + ' ' + readingTest.level}" th:value="${readingTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}"
+                               th:href="@{/test(id=${readingTest.id})}"
+                               th:text="${readingTest.name + ' ' + readingTest.level}"
+                               th:value="${readingTest.name}"></a>
                         </div>
                     </div>
                     <div class="w3-dropdown-hover">
                         <button class="w3-button w3-white w3-round-large">Listening</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getListening.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}" th:href="@{/test(id=${listeningTest.id})}"
-                               th:text="${listeningTest.name + ' ' + listeningTest.level}" th:value="${listeningTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}"
+                               th:href="@{/test(id=${listeningTest.id})}"
+                               th:text="${listeningTest.name + ' ' + listeningTest.level}"
+                               th:value="${listeningTest.name}"></a>
                         </div>
                     </div>
                 </ul>
@@ -70,10 +76,11 @@
         </tbody>
     </table>
     <button class="btn btn-warning" data-toggle="collapse" data-target="#changePassword">Change Password</button>
-    <form id="changePassword" class="collapse" th:action="@{/change-password}" method="post" >
+    <form id="changePassword" class="collapse" th:action="@{/change-password}" method="post">
         <div class="form-group">
             <label for="inputOldPassword">Old Password:</label>
-            <input class="form-control" type="password" id="inputOldPassword" placeholder="Enter old password" th:required="required"
+            <input class="form-control" type="password" id="inputOldPassword" placeholder="Enter old password"
+                   th:required="required"
                    name="oldPassword"/>
         </div>
         <div class="form-group">

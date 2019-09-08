@@ -25,24 +25,30 @@
                         <button class="w3-button w3-white w3-round-large">Grammar</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getGrammar.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}" th:href="@{/test(id=${grammarTest.id})}"
-                               th:text="${grammarTest.name + ' ' + grammarTest.level}" th:value="${grammarTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}"
+                               th:href="@{/test(id=${grammarTest.id})}"
+                               th:text="${grammarTest.name + ' ' + grammarTest.level}"
+                               th:value="${grammarTest.name}"></a>
                         </div>
                     </div>
                     <div class="w3-dropdown-hover">
                         <button class="w3-button w3-white w3-round-large">Reading</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getReading.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}" th:href="@{/test(id=${readingTest.id})}"
-                               th:text="${readingTest.name + ' ' + readingTest.level}" th:value="${readingTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}"
+                               th:href="@{/test(id=${readingTest.id})}"
+                               th:text="${readingTest.name + ' ' + readingTest.level}"
+                               th:value="${readingTest.name}"></a>
                         </div>
                     </div>
                     <div class="w3-dropdown-hover">
                         <button class="w3-button w3-white w3-round-large">Listening</button>
                         <div class="w3-dropdown-content w3-bar-block w3-border">
                             <p th:if="${getListening.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}" th:href="@{/test(id=${listeningTest.id})}"
-                               th:text="${listeningTest.name + ' ' + listeningTest.level}" th:value="${listeningTest.name}"></a>
+                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}"
+                               th:href="@{/test(id=${listeningTest.id})}"
+                               th:text="${listeningTest.name + ' ' + listeningTest.level}"
+                               th:value="${listeningTest.name}"></a>
                         </div>
                     </div>
                 </ul>
@@ -54,10 +60,11 @@
     </div>
 </nav>
 <div class="container">
-    <table >
+    <table>
         <tbody>
         <tr th:each="map : ${resultMap}">
-            <td style="margin: 10px; padding: 5px;" th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
+            <td style="margin: 10px; padding: 5px;"
+                th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
             <td style="margin: 10px; padding: 5px;" th:if="${map.value == true}">
                 <i class="fas fa-thumbs-up"></i>
             </td>
@@ -68,9 +75,10 @@
         </tbody>
     </table>
     <div style="width:800px; margin:0 auto;">
-        <p  class="text-success" th:text="${'Your result is:  ' + achievedPoints + ' / ' + resultMap.size()}"></p>
+        <p class="text-success" th:text="${'Your result is:  ' + achievedPoints + ' / ' + resultMap.size()}"></p>
     </div>
-    <a class="w3-button w3-white w3-border w3-border-green w3-round-large" role="button" th:href="@{/test(id=${getTestId})}">Once again?</a>
+    <a class="w3-button w3-white w3-border w3-border-green w3-round-large" role="button"
+       th:href="@{/test(id=${getTestId})}">Once again?</a>
 </div>
 <style>
 .fa-thumbs-up{
@@ -79,6 +87,7 @@
 .fa-thumbs-down {
   color: red;
 }
+
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
