@@ -56,7 +56,7 @@
 </nav>
 
 <div class="container">
-    <div style="width:800px; margin:0 auto;">
+    <div style="width:800px; margin:0 auto;" th:if="${getTest.videoUrl != null}">
         <iframe width="560" height="315" th:src="${getTest.videoUrl}" frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                 allowfullscreen="1"></iframe>
