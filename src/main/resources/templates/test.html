@@ -62,7 +62,7 @@
                 allowfullscreen="1"></iframe>
     </div>
     <ul>
-        <form class="allForms" method="post" th:action="@{result-process}" th:object="${userAnswers}">
+        <form onsubmit="return confirm('Do you really want to submit the answers?');" method="post" th:action="@{result-process}" th:object="${userAnswers}">
             <input type="hidden" name="testId" th:value="${getTest.id}"/>
             <li th:each="task: ${taskList}"><h3 th:text="${task.name}"></h3>
 
@@ -95,11 +95,10 @@
 
             </li>
 
-            <button type="submit" class="btn btn-info">Submit</button>
+            <button type="submit"  class="btn btn-info">Submit</button>
         </form>
     </ul>
 </div>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
