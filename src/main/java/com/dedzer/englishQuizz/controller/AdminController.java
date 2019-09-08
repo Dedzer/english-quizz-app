@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.controller;
 
 import com.dedzer.englishQuizz.entity.User;
+import com.dedzer.englishQuizz.service.TestService;
 import com.dedzer.englishQuizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+    @Autowired
+    TestService testService;
 
     @RequestMapping("/adminpage")
     public ModelAndView adminPage(){
@@ -23,6 +26,9 @@ public class AdminController {
             modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
             modelAndView.addObject("allUsers", userService.getAllUsers());
             modelAndView.addObject("currentUserId", userService.getCurrentUser().getId());
+            modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
+            modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
+            modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         } else {
             modelAndView = new ModelAndView("redirect:index");
         }

@@ -20,6 +20,9 @@ public class IndexController {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("testList", testService.getAllTests());
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
+        modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
+        modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
+        modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         return modelAndView;
     }
 }

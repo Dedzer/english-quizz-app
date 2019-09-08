@@ -39,6 +39,9 @@ public class TestController {
         modelAndView.addObject("taskList", taskService.getTaskByTestId(id));
         modelAndView.addObject("userAnswers", new UserAnswers());
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
+        modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
+        modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
+        modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         return modelAndView;
     }
 
@@ -51,6 +54,9 @@ public class TestController {
         modelAndView.addObject("resultMap", resultMap);
         modelAndView.addObject("achievedPoints", userResultsService.achievedPoints(userAnswers.getTestId(), resultMap));
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
+        modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
+        modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
+        modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         return modelAndView;
     }
 }

@@ -5,6 +5,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
@@ -16,14 +17,35 @@
         </div>
         <ul class="nav navbar-nav">
             <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
-            <li><a href="/myprofile">My profile</a></li>
+            <li><a href="/myprofile">My Profile</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown">Tests
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li th:each="test : ${testList}">
-                        <a th:href="@{/test(id=${test.id})}" th:text="${test.name}" th:value="${test.name}"></a>
-                    </li>
+                    <div class="w3-dropdown-hover">
+                        <button class="w3-button w3-white w3-round-large">Grammar</button>
+                        <div class="w3-dropdown-content w3-bar-block w3-border">
+                            <p th:if="${getGrammar.isEmpty()}">there is no tests yet</p>
+                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}" th:href="@{/test(id=${grammarTest.id})}"
+                               th:text="${grammarTest.name + ' ' + grammarTest.level}" th:value="${grammarTest.name}"></a>
+                        </div>
+                    </div>
+                    <div class="w3-dropdown-hover">
+                        <button class="w3-button w3-white w3-round-large">Reading</button>
+                        <div class="w3-dropdown-content w3-bar-block w3-border">
+                            <p th:if="${getReading.isEmpty()}">there is no tests yet</p>
+                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}" th:href="@{/test(id=${readingTest.id})}"
+                               th:text="${readingTest.name + ' ' + readingTest.level}" th:value="${readingTest.name}"></a>
+                        </div>
+                    </div>
+                    <div class="w3-dropdown-hover">
+                        <button class="w3-button w3-white w3-round-large">Listening</button>
+                        <div class="w3-dropdown-content w3-bar-block w3-border">
+                            <p th:if="${getListening.isEmpty()}">there is no tests yet</p>
+                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}" th:href="@{/test(id=${listeningTest.id})}"
+                               th:text="${listeningTest.name + ' ' + listeningTest.level}" th:value="${listeningTest.name}"></a>
+                        </div>
+                    </div>
                 </ul>
             </li>
         </ul>

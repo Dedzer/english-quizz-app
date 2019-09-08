@@ -21,4 +21,8 @@ public class TestService {
     public Test getTestById(Long id) {
         return testRepository.findOne(id);
     }
+
+    public List<Test> getAllTestsByType(String type){
+        return testRepository.findAllTestsByType(type);
+    }
 }
