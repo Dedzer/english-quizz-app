@@ -1,9 +1,13 @@
 package com.dedzer.englishQuizz.entity;
 
+import com.dedzer.englishQuizz.annotations.PasswordMatchers;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@PasswordMatchers
 public class User {
 
     @Id
