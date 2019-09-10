@@ -19,9 +19,9 @@ public class AdminController {
     TestService testService;
 
     @RequestMapping("/adminpage")
-    public ModelAndView adminPage(){
+    public ModelAndView adminPage() {
         ModelAndView modelAndView;
-        if(userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
+        if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")) {
             modelAndView = new ModelAndView("adminpage");
             modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
             modelAndView.addObject("allUsers", userService.getAllUsers());
@@ -36,12 +36,13 @@ public class AdminController {
     }
 
     @PostMapping("/addadmin")
-    public String addAdmin(@ModelAttribute User user){
+    public String addAdmin(@ModelAttribute User user) {
         userService.addAdmin(user);
         return "redirect:adminpage";
     }
+
     @PostMapping("/deleteadmin")
-    public String deleteAdmin(@ModelAttribute User user){
+    public String deleteAdmin(@ModelAttribute User user) {
         userService.deleteAdmin(user);
         return "redirect:adminpage";
     }

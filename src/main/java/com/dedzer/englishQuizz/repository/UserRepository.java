@@ -16,11 +16,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = "update user u set u.password =:password where u.id =:id", nativeQuery = true)
-    void updatePassword(@Param("password") String password, @Param("id")Long id);
+    void updatePassword(@Param("password") String password, @Param("id") Long id);
 
     @Transactional
     @Modifying(clearAutomatically = true)
     @Query(value = "update user u set u.role =:role where u.id =:id", nativeQuery = true)
-    void changeUserRole(@Param("role") String role, @Param("id")Long id);
+    void changeUserRole(@Param("role") String role, @Param("id") Long id);
 
 }

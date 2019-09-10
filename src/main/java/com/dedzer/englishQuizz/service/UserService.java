@@ -39,36 +39,39 @@ public class UserService {
     public User getCurrentUser() {
         return userRepository.findUserByLogin(getCurrentLogin()).get();
     }
-    public Optional<User> getUserByLogin(String login){
+
+    public Optional<User> getUserByLogin(String login) {
         return userRepository.findUserByLogin(login);
     }
 
-    public boolean isUserLoginExists(String login){
-        if(getUserByLogin(login).isPresent()){
+    public boolean isUserLoginExists(String login) {
+        if (getUserByLogin(login).isPresent()) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void changePassword(User user, String oldPassword){
-        if(bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword())){
-            if(user.getPassword().equals(user.getConfirmPassword())){
+    public void changePassword(User user, String oldPassword) {
+        if (bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword())) {
+            if (user.getPassword().equals(user.getConfirmPassword())) {
                 userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
             }
         }
     }
-    public List<User> getAllUsers(){
+
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public void addAdmin(User user){
-        if(user.getRole().equals("ROLE_USER")){
+    public void addAdmin(User user) {
+        if (user.getRole().equals("ROLE_USER")) {
             userRepository.changeUserRole("ROLE_ADMIN", user.getId());
         }
     }
-    public void deleteAdmin(User user){
-        if(user.getRole().equals("ROLE_ADMIN")){
+
+    public void deleteAdmin(User user) {
+        if (user.getRole().equals("ROLE_ADMIN")) {
             userRepository.changeUserRole("ROLE_USER", user.getId());
         }
     }

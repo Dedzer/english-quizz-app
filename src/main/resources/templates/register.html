@@ -13,7 +13,7 @@
 <div class="container">
     <form th:action="@{/register-process}" method="post" th:object="${user}">
         <div class="form-group">
-            <label for="inputLogin" >Login:</label>
+            <label for="inputLogin">Login:</label>
             <input class="form-control" type="text" id="inputLogin" placeholder="Enter login" th:required="required"
                    th:field="*{login}"/>
         </div>

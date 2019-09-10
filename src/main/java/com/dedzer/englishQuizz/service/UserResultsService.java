@@ -51,7 +51,7 @@ public class UserResultsService {
         return points;
     }
 
-    public void saveResults(long testId, int points){
+    public void saveResults(long testId, int points) {
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         Date date = new Date(stamp.getTime());
         UserResults userResults = new UserResults();

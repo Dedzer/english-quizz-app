@@ -16,7 +16,7 @@ public class IndexController {
     private TestService testService;
 
     @GetMapping("/index")
-    public ModelAndView index(){
+    public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("testList", testService.getAllTests());
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());

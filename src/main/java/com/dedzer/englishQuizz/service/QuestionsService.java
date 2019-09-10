@@ -12,7 +12,7 @@ public class QuestionsService {
     @Autowired
     private QuestionsRepository questionsRepository;
 
-    public Questions findQuestionById(Long id){
+    public Questions findQuestionById(Long id) {
         return questionsRepository.findQuestionById(id);
     }
 }

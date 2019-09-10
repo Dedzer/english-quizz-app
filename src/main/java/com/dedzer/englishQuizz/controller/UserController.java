@@ -39,7 +39,7 @@ public class UserController {
     @PostMapping("/register-process")
     public ModelAndView addNewUser(@ModelAttribute @Valid User user, BindingResult result, Errors errors) {
         ModelAndView modelAndView;
-        if(!result.hasErrors()){
+        if (!result.hasErrors()) {
             modelAndView = new ModelAndView("redirect:login");
             userService.addUser(user);
         } else {
@@ -61,7 +61,7 @@ public class UserController {
     }
 
     @PostMapping("/change-password")
-    public ModelAndView changePassword(@ModelAttribute User user, @ModelAttribute("oldPassword") String oldPassword){
+    public ModelAndView changePassword(@ModelAttribute User user, @ModelAttribute("oldPassword") String oldPassword) {
         ModelAndView modelAndView = new ModelAndView("myprofile");
         userService.changePassword(user, oldPassword);
         return modelAndView;

@@ -14,8 +14,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 public @interface UniqueLogin {
 
-    public String message() default "The user with this login has already exists!";
+    public String message() default "The user with this login has already exist!";
+
     public Class<?>[] groups() default {};
-    public Class<? extends Payload>[] payload() default{};
+
+    public Class<? extends Payload>[] payload() default {};
 
 }

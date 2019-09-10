@@ -13,12 +13,12 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, St
     private UserDetailsService userDetailsService;
 
     @Override
-    public void initialize(UniqueEmail constraintAnnotation){
+    public void initialize(UniqueEmail constraintAnnotation) {
 
     }
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext context){
+    public boolean isValid(String email, ConstraintValidatorContext context) {
         return email != null && !userDetailsService.isUserDetailsEmailExists(email);
     }
 }

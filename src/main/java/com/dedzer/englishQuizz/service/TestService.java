@@ -22,7 +22,7 @@ public class TestService {
         return testRepository.findOne(id);
     }
 
-    public List<Test> getAllTestsByType(String type){
+    public List<Test> getAllTestsByType(String type) {
         return testRepository.findAllTestsByType(type);
     }
 }
