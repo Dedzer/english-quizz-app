@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.entity;
 
 import com.dedzer.englishQuizz.annotations.PasswordMatchers;
+import com.dedzer.englishQuizz.annotations.UniqueLogin;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @UniqueLogin
     private String login;
     private String password;
     @Transient

@@ -43,6 +43,14 @@ public class UserService {
         return userRepository.findUserByLogin(login);
     }
 
+    public boolean isUserLoginExists(String login){
+        if(getUserByLogin(login).isPresent()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public void changePassword(User user, String oldPassword){
         if(bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword())){
             if(user.getPassword().equals(user.getConfirmPassword())){
