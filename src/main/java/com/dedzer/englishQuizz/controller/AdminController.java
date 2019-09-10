@@ -26,9 +26,6 @@ public class AdminController {
             modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
             modelAndView.addObject("allUsers", userService.getAllUsers());
             modelAndView.addObject("currentUserId", userService.getCurrentUser().getId());
-            modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
-            modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
-            modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         } else {
             modelAndView = new ModelAndView("redirect:index");
         }

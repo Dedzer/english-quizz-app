@@ -34,14 +34,10 @@ public class TestController {
     @GetMapping("/test")
     public ModelAndView getTest(@RequestParam Long id) {
         ModelAndView modelAndView = new ModelAndView("test");
-        modelAndView.addObject("testList", testService.getAllTests());
         modelAndView.addObject("getTest", testService.getTestById(id));
         modelAndView.addObject("taskList", taskService.getTaskByTestId(id));
         modelAndView.addObject("userAnswers", new UserAnswers());
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
-        modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
-        modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
-        modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         return modelAndView;
     }
 
@@ -49,15 +45,21 @@ public class TestController {
     public ModelAndView userResult(@ModelAttribute("userAnswers") UserAnswers userAnswers) {
         ModelAndView modelAndView = new ModelAndView("result");
         Map<Long, Boolean> resultMap = userResultsService.getResult(userAnswers.getQuestionId(), userAnswers.getAnswer());
-        modelAndView.addObject("testList", testService.getAllTests());
         modelAndView.addObject("getQuestion", questionsService);
         modelAndView.addObject("resultMap", resultMap);
         modelAndView.addObject("achievedPoints", userResultsService.achievedPoints(userAnswers.getTestId(), resultMap));
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
+        modelAndView.addObject("getTestId", userAnswers.getTestId());
+        return modelAndView;
+    }
+
+    @GetMapping("/tests")
+    public ModelAndView allTestsPage(){
+        ModelAndView modelAndView = new ModelAndView("tests");
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         modelAndView.addObject("getListening", testService.getAllTestsByType("listening"));
         modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
         modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
-        modelAndView.addObject("getTestId", userAnswers.getTestId());
         return modelAndView;
     }
 }

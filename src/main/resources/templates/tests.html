@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <title></title>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/index">WebSiteName</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
+            <li><a href="/myprofile">My Profile</a></li>
+            <li><a href="/tests">Tests</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/login?logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h3>Grammar tests:</h3>
+    <ul class="w3-ul w3-hoverable">
+        <li th:if="${getGrammar.isEmpty()}">
+            There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
+        </li>
+        <li th:each="grammarTest : ${getGrammar}">
+            <a class="w3-bar-item w3-button"
+               th:href="@{/test(id=${grammarTest.id})}"
+               th:text="${grammarTest.name + ' ' + grammarTest.level}"
+               th:value="${grammarTest.name}"></a>
+        </li>
+    </ul>
+    <h3>Reading tests:</h3>
+    <ul class="w3-ul w3-hoverable">
+        <li th:if="${getReading.isEmpty()}">
+            There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
+        </li>
+        <li th:each="readingTest : ${getReading}">
+            <a class="w3-bar-item w3-button"
+               th:href="@{/test(id=${readingTest.id})}"
+               th:text="${readingTest.name + ' ' + readingTest.level}"
+               th:value="${readingTest.name}"></a>
+        </li>
+    </ul>
+    <h3>Listening tests:</h3>
+    <ul class="w3-ul w3-hoverable">
+        <li th:if="${getListening.isEmpty()}">
+            There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
+        </li>
+        <li th:each="listeningTest : ${getListening}">
+            <a class="w3-bar-item w3-button"
+               th:href="@{/test(id=${listeningTest.id})}"
+               th:text="${listeningTest.name + ' ' + listeningTest.level}"
+               th:value="${listeningTest.name}"></a>
+        </li>
+    </ul>
+</div>
+<style>
+.fa-kiss-wink-heart{
+  color: OrangeRed;
+}
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+</body>
+</html>

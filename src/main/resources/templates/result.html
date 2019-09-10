@@ -17,42 +17,7 @@
         <ul class="nav navbar-nav">
             <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
             <li><a href="/myprofile">My Profile</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">Tests
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <div class="w3-dropdown-hover">
-                        <button class="w3-button w3-white w3-round-large">Grammar</button>
-                        <div class="w3-dropdown-content w3-bar-block w3-border">
-                            <p th:if="${getGrammar.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="grammarTest : ${getGrammar}"
-                               th:href="@{/test(id=${grammarTest.id})}"
-                               th:text="${grammarTest.name + ' ' + grammarTest.level}"
-                               th:value="${grammarTest.name}"></a>
-                        </div>
-                    </div>
-                    <div class="w3-dropdown-hover">
-                        <button class="w3-button w3-white w3-round-large">Reading</button>
-                        <div class="w3-dropdown-content w3-bar-block w3-border">
-                            <p th:if="${getReading.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="readingTest : ${getReading}"
-                               th:href="@{/test(id=${readingTest.id})}"
-                               th:text="${readingTest.name + ' ' + readingTest.level}"
-                               th:value="${readingTest.name}"></a>
-                        </div>
-                    </div>
-                    <div class="w3-dropdown-hover">
-                        <button class="w3-button w3-white w3-round-large">Listening</button>
-                        <div class="w3-dropdown-content w3-bar-block w3-border">
-                            <p th:if="${getListening.isEmpty()}">there is no tests yet</p>
-                            <a class="w3-bar-item w3-button" th:each="listeningTest : ${getListening}"
-                               th:href="@{/test(id=${listeningTest.id})}"
-                               th:text="${listeningTest.name + ' ' + listeningTest.level}"
-                               th:value="${listeningTest.name}"></a>
-                        </div>
-                    </div>
-                </ul>
-            </li>
+            <li><a href="/tests">Tests</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/login?logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
@@ -87,9 +52,6 @@
 .fa-thumbs-down {
   color: red;
 }
-
-
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
