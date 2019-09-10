@@ -4,6 +4,7 @@ import com.dedzer.englishQuizz.annotations.PasswordMatchers;
 import com.dedzer.englishQuizz.annotations.UniqueLogin;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class User {
     private String role;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_details_id")
+    @Valid
     private UserDetails userDetails;
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     private List<UserResults> userResults;
