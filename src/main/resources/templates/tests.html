@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-    <title></title>
+    <title>Tests</title>
 </head>
 <body>
 <nav class="navbar navbar-inverse">
@@ -25,13 +25,14 @@
     </div>
 </nav>
 <div class="container">
+    <p style="text-align: center" class="w3-xxxlarge">𝘾𝙝𝙤𝙤𝙨𝙚 𝙮𝙤𝙪𝙧 𝙩𝙚𝙨𝙩!</p>
     <h3>Grammar tests:</h3>
     <ul class="w3-ul w3-hoverable">
         <li th:if="${getGrammar.isEmpty()}">
             There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
         </li>
         <li th:each="grammarTest : ${getGrammar}">
-            <a class="w3-bar-item w3-button"
+            <a class="list-group-item"
                th:href="@{/test(id=${grammarTest.id})}"
                th:text="${grammarTest.name + ' ' + grammarTest.level}"
                th:value="${grammarTest.name}"></a>
@@ -43,7 +44,7 @@
             There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
         </li>
         <li th:each="readingTest : ${getReading}">
-            <a class="w3-bar-item w3-button"
+            <a class="list-group-item"
                th:href="@{/test(id=${readingTest.id})}"
                th:text="${readingTest.name + ' ' + readingTest.level}"
                th:value="${readingTest.name}"></a>
@@ -55,7 +56,7 @@
             There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
         </li>
         <li th:each="listeningTest : ${getListening}">
-            <a class="w3-bar-item w3-button"
+            <a class="list-group-item"
                th:href="@{/test(id=${listeningTest.id})}"
                th:text="${listeningTest.name + ' ' + listeningTest.level}"
                th:value="${listeningTest.name}"></a>
