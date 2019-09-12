@@ -25,23 +25,23 @@
     </div>
 </nav>
 <div class="container">
-    <table class="w3-table">
+    <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names.." id="myInput" onkeyup="myFunction()"/>
+    <table class="w3-table" id="myTable">
         <thead>
-            <th>Login</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Results</th>
+        <th>Login</th>
+        <th>Full Name</th>
+        <th>Results</th>
         </thead>
         <tbody>
         <tr th:each="user : ${allUsers}" th:if="${user.id != currentUserId}">
-            <td style="margin: 10px; padding: 5px;" th:text="${user.login}"></td>
-            <td style="margin: 10px; padding: 5px;" th:text="${user.userDetails.firstName}"></td>
-            <td style="margin: 10px; padding: 5px;" th:text="${user.userDetails.lastName}"></td>
+            <td style="margin: 10px; padding: 5px;" th:text="${user.login}" class="login"></td>
+            <td style="margin: 10px; padding: 5px;" th:text="${user.userDetails.firstName + ' ' + user.userDetails.lastName}"></td>
             <td>
                 <button class="btn btn-info btn-xs" data-toggle="collapse"
                         th:attr="data-target='#showResult'+${user.id}">Show
                     User Results
                 </button>
+                <p class="collapse" th:if="${user.userResults.isEmpty()}">There is no results yet!</p>
                 <table th:id="'showResult' + ${user.id}" class="collapse">
                     <tbody>
                     <tr th:each="userResult : ${user.userResults}">
@@ -70,7 +70,30 @@
         </tbody>
     </table>
 </div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+/*]]>*/
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 </body>
 </html>
