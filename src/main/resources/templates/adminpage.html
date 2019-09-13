@@ -41,9 +41,11 @@
                         th:attr="data-target='#showResult'+${user.id}">Show
                     User Results
                 </button>
-                <p class="collapse" th:if="${user.userResults.isEmpty()}">There is no results yet!</p>
                 <table th:id="'showResult' + ${user.id}" class="collapse">
                     <tbody>
+                    <tr>
+                        <td th:if="${user.userResults.isEmpty()}">There is no results yet!</td>
+                    </tr>
                     <tr th:each="userResult : ${user.userResults}">
                         <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getName()}"></td>
                         <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAchievedPoints()}"></td>
@@ -69,6 +71,8 @@
         </tr>
         </tbody>
     </table>
+    <a class="w3-button w3-white w3-border w3-border-green w3-round-large" role="button"
+       th:href="@{/createtest)}">Create test!</a>
 </div>
 <script th:inline="javascript">
 /*<![CDATA[*/
