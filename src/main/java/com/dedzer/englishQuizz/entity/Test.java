@@ -9,12 +9,12 @@ public class Test {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
     private String level;
     private String type;
     @Column(name = "video_url")
     private String videoUrl;
-    @OneToMany(mappedBy = "test", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE)
     private List<Task> tasks;
 
     public Test() {
@@ -28,12 +28,12 @@ public class Test {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getLevel() {

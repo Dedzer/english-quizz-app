@@ -1,14 +1,12 @@
 package com.dedzer.englishQuizz.controller;
 
 
+import com.dedzer.englishQuizz.entity.Test;
 import com.dedzer.englishQuizz.model.UserAnswers;
 import com.dedzer.englishQuizz.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
@@ -61,5 +59,42 @@ public class TestController {
         modelAndView.addObject("getGrammar", testService.getAllTestsByType("grammar"));
         modelAndView.addObject("getReading", testService.getAllTestsByType("reading"));
         return modelAndView;
+    }
+
+    @GetMapping("/createtest")
+    public ModelAndView createTestPage(){
+        ModelAndView modelAndView = new ModelAndView("createtest");
+        modelAndView.addObject("test", new Test());
+        return modelAndView;
+    }
+    @PostMapping("/createtest")
+    public ModelAndView createTest(@ModelAttribute Test test){
+        ModelAndView modelAndView = new ModelAndView("redirect:admintestpage");
+        if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
+            testService.saveTest(test);
+        }
+        return modelAndView;
+    }
+
+    @GetMapping("/updatetest")
+    public ModelAndView updateTest(@RequestParam Long id) {
+        ModelAndView modelAndView = new ModelAndView("updateTest");
+        modelAndView.addObject("test", testService.getTestById(id));
+        return modelAndView;
+    }
+    @PostMapping("/updatetest")
+    public ModelAndView updateTest(@ModelAttribute Test test){
+        ModelAndView modelAndView = new ModelAndView("redirect:admintestpage");
+        if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
+            testService.updateTest(test);
+        }
+        return modelAndView;
+    }
+    @PostMapping("/deletetest")
+    public String deleteTest(@RequestParam Long id){
+        if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
+            testService.deleteTest(id);
+        }
+        return "redirect:admintestpage";
     }
 }

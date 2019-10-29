@@ -25,4 +25,19 @@ public class TestService {
     public List<Test> getAllTestsByType(String type) {
         return testRepository.findAllTestsByType(type);
     }
+
+    public void saveTest(Test test){
+        testRepository.save(test);
+    }
+
+    public void updateTest(Test test){
+        Test testFromRepository = testRepository.getOne(test.getId());
+        if (testFromRepository != null){
+            testRepository.save(test);
+        }
+    }
+
+    public void deleteTest(Long id){
+        testRepository.delete(id);
+    }
 }
