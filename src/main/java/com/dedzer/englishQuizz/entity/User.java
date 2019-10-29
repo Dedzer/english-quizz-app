@@ -25,7 +25,7 @@ public class User {
     @JoinColumn(name = "user_details_id")
     @Valid
     private UserDetails userDetails;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<UserResults> userResults;
 
     public User() {

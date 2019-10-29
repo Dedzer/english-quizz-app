@@ -36,18 +36,17 @@
         <tr th:each="user : ${allUsers}" th:if="${user.id != currentUserId}">
             <td style="margin: 10px; padding: 5px;" th:text="${user.login}" class="login"></td>
             <td style="margin: 10px; padding: 5px;" th:text="${user.userDetails.firstName + ' ' + user.userDetails.lastName}"></td>
+            <td style="margin: 10px; padding: 5px;" th:text="${user.userDetails.email}"></td>
             <td>
                 <button class="btn btn-info btn-xs" data-toggle="collapse"
                         th:attr="data-target='#showResult'+${user.id}">Show
                     User Results
                 </button>
+                <p class="collapse" th:if="${user.userResults.isEmpty()}">There is no results yet!</p>
                 <table th:id="'showResult' + ${user.id}" class="collapse">
                     <tbody>
-                    <tr>
-                        <td th:if="${user.userResults.isEmpty()}">There is no results yet!</td>
-                    </tr>
                     <tr th:each="userResult : ${user.userResults}">
-                        <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getName()}"></td>
+                        <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getTitle()}"></td>
                         <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAchievedPoints()}"></td>
                         <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAccomplishedDate()}"></td>
                     </tr>
@@ -72,7 +71,7 @@
         </tbody>
     </table>
     <a class="w3-button w3-white w3-border w3-border-green w3-round-large" role="button"
-       th:href="@{/createtest)}">Create test!</a>
+       th:href="@{/admintestpage}">Show all tests</a>
 </div>
 <script th:inline="javascript">
 /*<![CDATA[*/

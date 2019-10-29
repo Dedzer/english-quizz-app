@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-    <title th:text="${getTest.name}"></title>
+    <title th:text="${getTest.title}"></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
@@ -36,7 +36,7 @@
         <form onsubmit="return confirm('Do you really want to submit the answers?');" method="post"
               th:action="@{result-process}" th:object="${userAnswers}">
             <input type="hidden" name="testId" th:value="${getTest.id}"/>
-            <li th:each="task: ${taskList}"><h3 th:text="${task.name}"></h3>
+            <li th:each="task: ${taskList}"><h3 th:text="${task.task}"></h3>
                 <ol type="1">
                     <li th:each="question: ${task.questionsSet}"><h4 th:text="${question.question}"></h4>
                         <input type="hidden" name="questionId" th:value="${question.id}"/>

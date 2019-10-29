@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
@@ -34,8 +35,8 @@
         <li th:each="grammarTest : ${getGrammar}">
             <a class="list-group-item"
                th:href="@{/test(id=${grammarTest.id})}"
-               th:text="${grammarTest.name + ' ' + grammarTest.level}"
-               th:value="${grammarTest.name}"></a>
+               th:text="${grammarTest.title + ' ' + grammarTest.level}"
+               th:value="${grammarTest.title}"></a>
         </li>
     </ul>
     <h3>Reading tests:</h3>
@@ -46,8 +47,8 @@
         <li th:each="readingTest : ${getReading}">
             <a class="list-group-item"
                th:href="@{/test(id=${readingTest.id})}"
-               th:text="${readingTest.name + ' ' + readingTest.level}"
-               th:value="${readingTest.name}"></a>
+               th:text="${readingTest.title + ' ' + readingTest.level}"
+               th:value="${readingTest.title}"></a>
         </li>
     </ul>
     <h3>Listening tests:</h3>
@@ -58,8 +59,8 @@
         <li th:each="listeningTest : ${getListening}">
             <a class="list-group-item"
                th:href="@{/test(id=${listeningTest.id})}"
-               th:text="${listeningTest.name + ' ' + listeningTest.level}"
-               th:value="${listeningTest.name}"></a>
+               th:text="${listeningTest.title + ' ' + listeningTest.level}"
+               th:value="${listeningTest.title}"></a>
         </li>
     </ul>
 </div>
@@ -67,7 +68,6 @@
 .fa-kiss-wink-heart{
   color: OrangeRed;
 }
-
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
