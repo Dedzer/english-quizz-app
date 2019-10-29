@@ -1,7 +1,6 @@
 package com.dedzer.englishQuizz.entity;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,8 +12,8 @@ public class Task {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "test_id")
     private Test test;
-    private String name;
-    @OneToMany(mappedBy = "task", cascade = CascadeType.PERSIST)
+    private String task;
+    @OneToMany(mappedBy = "task", cascade = CascadeType.REMOVE)
     private Set<Questions> questionsSet;
 
     public Task() {
@@ -44,11 +43,11 @@ public class Task {
         this.test = test;
     }
 
-    public String getName() {
-        return name;
+    public String getTask() {
+        return task;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTask(String task) {
+        this.task = task;
     }
 }
