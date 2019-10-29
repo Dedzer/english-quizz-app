@@ -5,6 +5,7 @@ import com.dedzer.englishQuizz.service.TestService;
 import com.dedzer.englishQuizz.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +43,17 @@ public class AdminController {
     public String deleteAdmin(@ModelAttribute User user) {
         userService.deleteAdmin(user);
         return "redirect:adminpage";
+    }
+
+    @GetMapping("/admintestpage")
+    public ModelAndView allTests(){
+        ModelAndView modelAndView;
+        if(userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
+            modelAndView = new ModelAndView("allTestsForAdmin");
+            modelAndView.addObject("allTests", testService.getAllTests());
+        } else {
+            modelAndView = new ModelAndView("redirect:index");
+        }
+        return modelAndView;
     }
 }
