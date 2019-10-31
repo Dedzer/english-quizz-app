@@ -100,8 +100,11 @@
                                             <tr th:each="option : ${question.optionsSet}">
                                                 <td style="margin: 10px; padding: 5px"
                                                     th:text="${option.getOption()}"></td>
-                                                <td style="margin: 10px; padding: 5px"><a role="button">Update</a></td>
-                                                <td style="margin: 10px; padding: 5px"><a role="button">Delete</a></td>
+                                                <td style="margin: 10px; padding: 5px"><a role="button" th:href="@{/updateoption(id=${option.getId()})}">Update</a></td>
+                                                <td style="margin: 10px; padding: 5px">
+                                                    <form th:action="@{/deleteoption(id=${option.getId()})}" method="post">
+                                                        <button value="delete">Delete</button>
+                                                    </form></td>
                                             </tr>
                                             </tbody>
                                         </table>

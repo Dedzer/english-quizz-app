@@ -4,13 +4,16 @@ import javax.persistence.*;
 
 @Entity
 public class Options {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "choice")
+    private String option;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "question_id")
     private Questions questions;
-    private String option;
 
     public Options() {
     }
@@ -23,19 +26,19 @@ public class Options {
         this.id = id;
     }
 
-    public Questions getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Questions questions) {
-        this.questions = questions;
-    }
-
     public String getOption() {
         return option;
     }
 
     public void setOption(String option) {
         this.option = option;
+    }
+
+    public Questions getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Questions questions) {
+        this.questions = questions;
     }
 }
