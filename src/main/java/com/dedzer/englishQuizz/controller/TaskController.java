@@ -45,7 +45,7 @@ public class TaskController {
     }
 
     @PostMapping("/updatetask")
-    public String updateTask(@ModelAttribute Task task){
+    public String updateTask(@ModelAttribute("taskToUpdate") Task task){
         if(userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
             taskService.updateTask(task);
         }
