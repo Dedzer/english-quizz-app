@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta charset="utf-8"/>
+    <meta task="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <title>Create Task</title>
 </head>
 <body>
-$END$
+<div class="container">
+    <form th:action="@{/createquestion}" method="post" th:object="${newQuestion}">
+        <div class="form-group">
+            <label for="inputQuestion">Question:</label>
+            <input class="form-control" type="text" id="inputQuestion" placeholder="Enter question" th:required="required"
+                   th:field="*{question}"/>
+        </div>
+        <div class="form-group">
+            <label for="inputAnswer">Answer:</label>
+            <input class="form-control" type="text" id="inputAnswer" placeholder="Enter answer" th:required="required"
+                   th:field="*{answer}"/>
+        </div>
+        <input type="hidden" th:value="${newQuestion.getTask()}" th:field="*{task}"/>
+        <button type="reset" class="btn btn-light"> Reset</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </html>
