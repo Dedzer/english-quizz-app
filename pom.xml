@@ -11,8 +11,7 @@
 	<groupId>com.dedzer</groupId>
 	<artifactId>englishQuizz</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>englishQuizz</name>
-	<description>Application for upgreading english listening skills</description>
+	<description>Application for upgrading english listening skills</description>
 
 	<properties>
 		<java.version>1.8</java.version>
