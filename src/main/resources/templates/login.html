@@ -1,42 +1,60 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Login</title>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <title>sign in!</title>
-
 </head>
 <body>
 
-<div class="container">
-    <div th:if="${param.logout}">
-        <div class="alert alert-info">
-            You have been logged out.
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+
+            <span class="login100-form-title p-b-26">Welcome</span>
+            <span class="login100-form-title p-b-48"><i class="fas fa-theater-masks"></i></span>
+            <div th:if="${param.logout}">
+                <div class="alert alert-info">
+                    You have been logged out.
+                </div>
+            </div>
+            <form th:action="@{/login-process}" method="post">
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="login"/>
+                    <span class="focus-input100" data-placeholder="Login"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <input class="input100" type="password" name="password"/>
+                    <span class="focus-input100" data-placeholder="Password"></span>
+                </div>
+                <p class="alert alert-danger" th:if="${param.error}" th:text="'login or password is not correct'"></p>
+
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn">Login</button>
+                    </div>
+                </div>
+            </form>
+            <div class="text-center p-t-115">
+                <span class="txt1">Don’t have an account?</span>
+                <a class="txt2" href="/register">Sign Up</a>
+            </div>
+
         </div>
     </div>
-    <form th:action="@{/login-process}" method="post">
-        <div class="form-group">
-            <label for="inputLogin">Login:</label>
-            <input class="form-control" type="text" id="inputLogin" placeholder="Enter login" th:required="required"
-                   name="login"/>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password:</label>
-            <input class="form-control" type="password" id="inputPassword" placeholder="Enter password"
-                   th:required="required" name="password"/>
-            <p class="alert alert-danger" th:if="${param.error}" th:text="'login or password is not correct'"></p>
-        </div>
-        <div>
-            <a href="/register" data-toggle="tooltip" title="Sign Up!"> New around here?</a>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 </div>
 
+
+<div id="dropDownSelect1"></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
 </body>
 </html>
