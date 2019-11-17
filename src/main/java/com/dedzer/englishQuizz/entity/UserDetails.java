@@ -1,6 +1,7 @@
 package com.dedzer.englishQuizz.entity;
 
 import com.dedzer.englishQuizz.annotations.UniqueEmail;
+import com.dedzer.englishQuizz.annotations.ValidEmail;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @UniqueEmail
+    @ValidEmail
     private String email;
     @JoinColumn(name = "first_name")
     private String firstName;
