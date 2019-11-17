@@ -4,66 +4,73 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/test.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
     <title th:text="${getTest.title}"></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/index">WebSiteName</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
-            <li><a href="/myprofile">My Profile</a></li>
-            <li><a href="/tests">Tests</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login?logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-        </ul>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> Quiz Your English</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>
 
-<div class="container">
-    <div style="width:800px; margin:0 auto;" th:if="${getTest.videoUrl != null}">
-        <iframe width="560" height="315" th:src="${getTest.videoUrl}" frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen="1"></iframe>
-    </div>
-    <ul class="w3-ul">
-        <form onsubmit="return confirm('Do you really want to submit the answers?');" method="post"
-              th:action="@{result-process}" th:object="${userAnswers}">
-            <input type="hidden" name="testId" th:value="${getTest.id}"/>
-            <li th:each="task: ${taskList}"><h3 th:text="${task.task}"></h3>
-                <ol type="1">
-                    <li th:each="question: ${task.questionsSet}"><h4 th:text="${question.question}"></h4>
-                        <input type="hidden" name="questionId" th:value="${question.id}"/>
-                        <ul th:if="${question.optionsSet.isEmpty()}" class="list-group-item">
-                            <li class="list-group-item">
-                                <input class="w3-input w3-animate-input" type="text" th:field="*{answer}"/>
+<div class="limiter">
+    <div class="container-tests" style="align-items: center;">
+        <div class="wrap-tests">
+            <div class="iframe-container" th:if="${getTest.videoUrl != null}">
+                <iframe width="560" height="315" th:src="${getTest.videoUrl}" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen="1"></iframe>
+            </div>
+            <ul class="list-group">
+                <form onsubmit="return confirm('Do you really want to submit the answers?');" method="post"
+                      th:action="@{result-process}" th:object="${userAnswers}">
+                    <input type="hidden" name="testId" th:value="${getTest.id}"/>
+                    <li th:each="task: ${taskList}"
+                        class="list-group-item d-flex justify-content-between align-items-center"><h1
+                            th:text="${task.task}"></h1>
+                        <ol type="1">
+                            <li th:each="question: ${task.questionsSet}"><h3 th:text="${question.question}"></h3>
+                                <input type="hidden" name="questionId" th:value="${question.id}"/>
+                                <ul th:if="${question.optionsSet.isEmpty()}">
+                                    <li style="list-style-type:none">
+                                        <input class="w3-input w3-animate-input" type="text" th:field="*{answer}"/>
+                                    </li>
+                                </ul>
+                                <ul th:if="${!question.optionsSet.isEmpty()}">
+                                    <li style="list-style-type:none">
+                                        <select th:field="*{answer}" class="w3-select w3-border">
+                                            <option value="" selected="selected">Choose here</option>
+                                            <option th:each="option: ${question.optionsSet}" th:value="${option.option}"
+                                                    th:text="${option.option}"></option>
+                                        </select>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                        <ul th:if="${!question.optionsSet.isEmpty()}" class="list-group">
-                            <li class="list-group-item">
-                                <select th:field="*{answer}" class="w3-select w3-border">
-                                    <option value="" selected="selected">Choose here</option>
-                                    <option th:each="option: ${question.optionsSet}" th:value="${option.option}"
-                                            th:text="${option.option}"></option>
-                                </select>
-                            </li>
-                        </ul>
+                        </ol>
                     </li>
-                </ol>
-            </li>
-            <button type="submit" class="btn btn-info">Submit</button>
-        </form>
-    </ul>
+                    <div class="button-container">
+                        <button type="submit" class="test-form-btn">Submit</button>
+                    </div>
+                </form>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

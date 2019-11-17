@@ -1,68 +1,69 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/test.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
     <title>Tests</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/index">WebSiteName</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
-            <li><a href="/myprofile">My Profile</a></li>
-            <li><a href="/tests">Tests</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login?logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-        </ul>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> Quiz Your English</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>
-<div class="container">
-    <p style="text-align: center" class="w3-xxxlarge">𝘾𝙝𝙤𝙤𝙨𝙚 𝙮𝙤𝙪𝙧 𝙩𝙚𝙨𝙩!</p>
-    <h3>Grammar tests:</h3>
-    <ul class="w3-ul w3-hoverable">
-        <li th:if="${getGrammar.isEmpty()}">
-            There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
-        </li>
-        <li th:each="grammarTest : ${getGrammar}">
-            <a class="list-group-item"
-               th:href="@{/test(id=${grammarTest.id})}"
-               th:text="${grammarTest.title + ' ' + grammarTest.level}"
-               th:value="${grammarTest.title}"></a>
-        </li>
-    </ul>
-    <h3>Reading tests:</h3>
-    <ul class="w3-ul w3-hoverable">
-        <li th:if="${getReading.isEmpty()}">
-            There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
-        </li>
-        <li th:each="readingTest : ${getReading}">
-            <a class="list-group-item"
-               th:href="@{/test(id=${readingTest.id})}"
-               th:text="${readingTest.title + ' ' + readingTest.level}"
-               th:value="${readingTest.title}"></a>
-        </li>
-    </ul>
-    <h3>Listening tests:</h3>
-    <ul class="w3-ul w3-hoverable">
-        <li th:if="${getListening.isEmpty()}">
-            There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
-        </li>
-        <li th:each="listeningTest : ${getListening}">
-            <a class="list-group-item"
-               th:href="@{/test(id=${listeningTest.id})}"
-               th:text="${listeningTest.title + ' ' + listeningTest.level}"
-               th:value="${listeningTest.title}"></a>
-        </li>
-    </ul>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests">
+            <span class="tests-form-title">𝘾𝙝𝙤𝙤𝙨𝙚 𝙮𝙤𝙪𝙧 𝙩𝙚𝙨𝙩!</span>
+            <h2 class="m-t-40" style="font-family:verdana;">Grammar tests:</h2>
+            <ul class="w3-ul w3-hoverable m-t-30">
+                <li th:if="${getGrammar.isEmpty()}" style="font-size:130%; font-family:verdana;">
+                    There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
+                </li>
+                <li th:each="grammarTest : ${getGrammar}" style="font-family:verdana;">
+                    <a class="list-group-item fs-18"
+                       th:href="@{/test(id=${grammarTest.id})}"
+                       th:text="${grammarTest.title + ' ' + grammarTest.level}"
+                       th:value="${grammarTest.title}" style="font-size:130%; font-family:verdana;"></a>
+                </li>
+            </ul>
+            <h2 class="m-t-40" style="font-family:verdana;">Reading tests:</h2>
+            <ul class="w3-ul w3-hoverable m-t-30">
+                <li th:if="${getReading.isEmpty()}" style="font-size:130%; font-family:verdana;">
+                    There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
+                </li>
+                <li th:each="readingTest : ${getReading}">
+                    <a class="list-group-item fs-18" style="font-family:verdana;"
+                       th:href="@{/test(id=${readingTest.id})}"
+                       th:text="${readingTest.title + ' ' + readingTest.level}"
+                       th:value="${readingTest.title}" ></a>
+                </li>
+            </ul>
+            <h2 class="m-t-40" style="font-family:verdana;">Listening tests:</h2>
+            <ul class="w3-ul w3-hoverable fs-18 m-t-30">
+                <li th:if="${getListening.isEmpty()}" style="font-size:150%; font-family:verdana;">
+                    There is no tests yet, but will be added soon... <i class="far fa-kiss-wink-heart fa-5x"></i>
+                </li>
+                <li th:each="listeningTest : ${getListening}">
+                    <a class="list-group-item fs-18" style="font-family:verdana;"
+                       th:href="@{/test(id=${listeningTest.id})}"
+                       th:text="${listeningTest.title + ' ' + listeningTest.level}"
+                       th:value="${listeningTest.title}" ></a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 <style>
 .fa-kiss-wink-heart{
@@ -72,5 +73,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

@@ -1,59 +1,86 @@
 <!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Register</title>
     <meta charset="UTF-8"/>
-    <meta task="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/registration.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <title>sign up!</title>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
 </head>
-<body>
+<body style="background-color: #666666;">
 
-<div class="container">
-    <form th:action="@{/register-process}" method="post" th:object="${user}">
-        <div class="form-group">
-            <label for="inputLogin">Login:</label>
-            <input class="form-control" type="text" id="inputLogin" placeholder="Enter login" th:required="required"
-                   th:field="*{login}"/>
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <form th:action="@{/register-process}" class="login100-form" method="post" th:object="${user}">
+					<span class="login100-form-title p-b-43">
+						Fill out the form!
+					</span>
+
+                <div class="wrap-input100 ">
+                    <input class="input100" type="text" th:required="required" th:field="*{login}"/>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Login</span>
+                </div>
+
+                <div class="wrap-input100 ">
+                    <input class="input100" type="email" th:required="required" th:field="*{userDetails.email}"/>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Email</span>
+                </div>
+
+                <div class="wrap-input100 ">
+                    <input class="input100" type="text" th:required="required" th:field="*{userDetails.firstName}"/>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">First Name</span>
+                </div>
+
+                <div class="wrap-input100 ">
+                    <input class="input100" type="text" th:required="required" th:field="*{userDetails.lastName}"/>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Last Name</span>
+                </div>
+
+                <div class="wrap-input100">
+                    <input class="input100" type="password" th:required="required" th:field="*{password}"/>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Password</span>
+                </div>
+
+                <div class="wrap-input100">
+                    <input class="input100" type="password" th:required="required" th:field="*{confirmPassword}"/>
+                    <span class="focus-input100"></span>
+                    <span class="label-input100">Confirm Password</span>
+                </div>
+
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('all')}">
+                    <p th:each="err : ${#fields.errors('all')}" th:text="${err}"></p>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Register
+                    </button>
+                </div>
+
+                <div class="text-center p-t-46 p-b-20">
+						<span>
+                            <a class="txt2" href="/login">Comeback to login page!</a>
+						</span>
+                </div>
+
+            </form>
+
+            <div class="login100-more" style="background-image: url('images/undraw_personal_information_962o.svg'); background-size: 80% auto;">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="inputEmail">Email:</label>
-            <input class="form-control" type="email" id="inputEmail" placeholder="Enter email" th:required="required"
-                   th:field="*{userDetails.email}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputFirstName">First Name:</label>
-            <input class="form-control" type="text" id="inputFirstName" placeholder="Enter first task"
-                   th:required="required"
-                   th:field="*{userDetails.firstName}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputLastName">Last Name:</label>
-            <input class="form-control" type="text" id="inputLastName" placeholder="Enter last task"
-                   th:required="required"
-                   th:field="*{userDetails.lastName}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Password:</label>
-            <input class="form-control" type="password" id="inputPassword" placeholder="Enter password"
-                   th:required="required" th:field="*{password}"/>
-        </div>
-        <div class="form-group">
-            <label for="inputConfirmPassword">Confirm Password:</label>
-            <input class="form-control" type="password" id="inputConfirmPassword" placeholder="Enter password"
-                   th:required="required" th:field="*{confirmPassword}"/>
-        </div>
-        <div class="alert alert-warning" th:if="${#fields.hasErrors('all')}">
-            <p th:each="err : ${#fields.errors('all')}" th:text="${err}"></p>
-        </div>
-        <button type="reset" class="btn btn-light"> Reset</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>

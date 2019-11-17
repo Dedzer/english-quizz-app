@@ -5,9 +5,9 @@
     <meta charset="utf-8"/>
     <meta task="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="icon" type="image/png" href="images/icons/man-user.png"/>
-
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/form.css"/>
     <link rel="stylesheet" type="text/css" href="css/util.css"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
@@ -15,82 +15,163 @@
 </head>
 <body>
 <nav class="topnav">
-    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> WebSiteName</a>
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> Quiz Your English</a>
     <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
             class="fas fa-user-shield"></i> Admin Page</a>
     <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
     <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
     <div class="topnav-right">
-        <a href="/login?logout" class="hvr-grow-shadow"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+        <a href="/login?logout" class="hvr-grow-shadow"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>
 <div class="limiter">
     <div class="container-tests">
         <div class="wrap-tests">
-            <button class="btn btn-info" data-toggle="collapse" data-target="#showResult">Show My Results</button>
-            <table id="showResult" class="collapse">
-                <thead>
-                <th style="margin: 10px; padding: 5px;">Test</th>
-                <th style="margin: 10px; padding: 5px;">Result</th>
-                <th style="margin: 10px; padding: 5px;">Date</th>
-                </thead>
-                <tbody>
-                <tr th:each="userResult : ${userResultsList}">
-                    <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getTitle()}"></td>
-                    <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAchievedPoints() + ' %'}"></td>
-                    <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAccomplishedDate()}"></td>
-                </tr>
-                </tbody>
-            </table>
-            <button class="btn btn-warning" data-toggle="collapse" data-target="#changePassword">Change Password
-            </button>
-            <div id="changePassword" class="collapse">
-                <form th:action="@{/change-password}" th:object="${userToUpdate}" method="post">
-                    <div class="form-group">
-                        <label for="inputOldPassword">Old Password:</label>
-                        <input class="form-control" type="password" id="inputOldPassword"
-                               placeholder="Enter old password"
-                               th:required="required"
-                               task="oldPassword"/>
+            <div class="container" style="height: 500px; background-image: url('images/undraw_profile_6l1l.svg'); background-repeat: no-repeat; background-size: 600px 500px;">
+                <div class="profile-container">
+                    <div class="col-25" style="width: 15%">
+                        <div>
+                            <p class="fs-13">Login:</p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputNewPassword">New Password:</label>
-                        <input class="form-control" type="password" id="inputNewPassword"
-                               placeholder="Enter new password"
-                               th:required="required" task="password"/>
+                    <div class="col-75" style="width: 85%">
+                        <div >
+                            <p th:text="${getUser.getLogin()}"></p>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="inputConfirmPassword">Confirm New Password:</label>
-                        <input class="form-control" type="password" id="inputConfirmPassword"
-                               placeholder="Enter new password"
-                               th:required="required" task="confirmPassword"/>
+                    <div class="col-25" style="width: 15%">
+                        <div>
+                            <p class="fs-13">Email:</p>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="col-75" style="width: 85%">
+                        <div >
+                            <p th:text="${getUser.getUserDetails().getEmail()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-25" style="width: 15%">
+                        <div>
+                            <p class="fs-13">First Name:</p>
+                        </div>
+                    </div>
+                    <div class="col-75" style="width: 85%">
+                        <div >
+                            <p th:text="${getUser.getUserDetails().getFirstName()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-25" style="width: 15%">
+                        <div>
+                            <p class="fs-13">Last Name:</p>
+                        </div>
+                    </div>
+                    <div class="col-75" style="width: 85%">
+                        <div >
+                            <p th:text="${getUser.getUserDetails().getLastName()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-25" style="width: 15%">
+                        <div>
+                            <p class="fs-13">Finished Tests:</p>
+                        </div>
+                    </div>
+                    <div class="col-75" style="width: 85%">
+                        <div>
+                            <p th:text="${getUser.getUserResults().size()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <button class="btn btn-info" data-toggle="collapse" data-target="#showResult">Show My Results</button>
+                <div class="table-container">
+                    <table id="showResult" class="collapse w3-table">
+                        <thead>
+                        <th style="margin: 10px; padding: 5px;">Test:</th>
+                        <th style="margin: 10px; padding: 5px;">Result:</th>
+                        <th style="margin: 10px; padding: 5px;">Date:</th>
+                        </thead>
+                        <tbody>
+                        <tr th:each="userResult : ${userResultsList}">
+                            <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getTitle()}"></td>
+                            <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAchievedPoints() + ' %'}"></td>
+                            <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAccomplishedDate()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="container">
+                <form th:action="@{/updatedetails}" method="post" th:object="${detailsToUpdate}">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="firstName">First Name:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="firstName" placeholder="Your first name..." th:required="required" name="firstName"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="lastName">Last Name:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="lastName" placeholder="Your last name..." th:required="required" name="lastName"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Save Changes"/>
+                    </div>
                 </form>
             </div>
-            <button data-toggle="collapse" data-target="#changeDetails" class="btn btn-warning">Change Details</button>
-                <div>
-                    <form id="changeDetails" class="collapse" th:action="@{/change-details}" th:object="${userToUpdate}" method="post">
-                        <input type="hidden" th:value="${getUser.getId()}" th:field="*{id}"/>
-                        <input type="hidden" th:value="${getUser.getPassword()}" th:field="*{password}"/>
-                        <input type="hidden" th:value="${getUser.getPassword()}" th:field="*{confirmPassword}"/>
-                        <input type="hidden" th:value="${getUser.getLogin()}" th:field="*{login}"/>
-                        <input type="hidden" th:value="${getUser.getUserDetails().getEmail()}" th:field="*{userDetails.email}"/>
-                        <div class="form-group">
-                            <label for="inputNewPassword">First Name:</label>
-                            <input class="form-control" type="text" id="firstName"
-                                   placeholder="Your name..."
-                                   th:required="required" th:flied="*{userDetails.firstName}"/>
+            <div class="container">
+                <form th:action="@{/updateemail}" method="post" th:object="${detailsToUpdate}">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="email">Email:</label>
                         </div>
-                        <div class="form-group">
-                            <label for="inputConfirmPassword">Last Name:</label>
-                            <input class="form-control" type="text" id="lastName"
-                                   placeholder="Your last name..."
-                                   th:required="required" th:filed="*{userDetails.lastName}"/>
+                        <div class="col-75">
+                            <input type="email" id="email" placeholder="Your email..." th:required="required" name="email"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="alert alert-warning" th:if="${emailError != null}">
+                        <p th:text="${emailError}"></p>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Save Changes"/>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <form th:action="@{/updatepassword}" method="post" th:object="${userToUpdate}">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="inputOldPassword">Old Password:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="inputOldPassword" placeholder="Enter old password" th:required="required" name="oldPassword"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="inputNewPassword">New Password:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="inputNewPassword" placeholder="Enter new password" th:required="required" th:field="*{password}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="inputConfirmPassword">Confirm New Password:</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="password" id="inputConfirmPassword" placeholder="Enter new password" th:required="required" th:field="*{confirmPassword}"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Save Changes"/>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>

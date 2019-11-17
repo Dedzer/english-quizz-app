@@ -4,46 +4,65 @@
 <head>
     <meta charset="utf-8"/>
     <meta task="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/test.png"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
     <title>Results</title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/index">WebSiteName</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
-            <li><a href="/myprofile">My Profile</a></li>
-            <li><a href="/tests">Tests</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login?logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-        </ul>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> Quiz Your English</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
+            class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>
-<div class="container">
-    <table>
-        <tbody>
-        <tr th:each="map : ${resultMap}">
-            <td style="margin: 10px; padding: 5px;"
-                th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
-            <td style="margin: 10px; padding: 5px;" th:if="${map.value == true}">
-                <i class="fas fa-thumbs-up"></i>
-            </td>
-            <td style="margin: 10px; padding: 5px;" th:if="${map.value == false}">
-                <i class="fas fa-thumbs-down"></i>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div style="width:800px; margin:0 auto;">
-        <p class="text-success" th:text="${'Your result is:  ' + achievedPoints + ' / ' + resultMap.size()}"></p>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests">
+            <table>
+                <thead>
+                <th>Question</th>
+                <th>Your answer</th>
+                </thead>
+                <tbody>
+                <tr th:each="map, iterStat : ${resultMap}">
+                    <td
+                            th:text="${getQuestion.findQuestionById(map.key).getQuestion()}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:if="${userAnswer.get(iterStat.index) != ''}"
+                        th:text="${userAnswer.get(iterStat.index)}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:if="${userAnswer.get(iterStat.index) == ''}">You have not
+                        entered any answer!
+                    </td>
+                    <td style="margin: 10px; padding: 5px;" th:if="${map.value == true}">
+                        <i class="fas fa-thumbs-up"></i>
+                    </td>
+                    <td style="margin: 10px; padding: 5px;" th:if="${map.value == false}">
+                        <i class="fas fa-thumbs-down"></i>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div style="width:800px; margin:0 auto;" th:if="${achievedPoints &lt; 50.0}">
+                <p  th:text="${'Your result is:  ' + achievedPoints + ' %'}" style="text-align: center; font-size: 40px; color: red;"></p>
+            </div>
+            <div style="width:800px; margin:0 auto;" th:if="${achievedPoints &gt; 50.0}">
+                <p  th:text="${'Your result is:  ' + achievedPoints + ' %'}" style="text-align: center; font-size: 40px; color: green;"></p>
+            </div>
+            <div style="width:800px; margin:0 auto;" th:if="${achievedPoints == 50.0}">
+                <p  th:text="${'Your result is:  ' + achievedPoints + ' %'}" style="text-align: center; font-size: 40px; color: green;"></p>
+            </div>
+            <div class="button-container">
+                <a role="button" class="test-form-btn" th:href="@{/test(id=${getTestId})}">Once again?</a>
+            </div>
+        </div>
     </div>
-    <a class="w3-button w3-white w3-border w3-border-green w3-round-large" role="button"
-       th:href="@{/test(id=${getTestId})}">Once again?</a>
 </div>
 <style>
 .fa-thumbs-up{
@@ -52,9 +71,11 @@
 .fa-thumbs-down {
   color: red;
 }
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

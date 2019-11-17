@@ -15,13 +15,13 @@
 </head>
 <body>
 <nav class="topnav">
-    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> WebSiteName</a>
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> Quiz Your English</a>
     <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
             class="fas fa-user-shield"></i> Admin Page</a>
     <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
     <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
     <div class="topnav-right">
-        <a href="/login?logout" class="hvr-grow-shadow"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+        <a href="/login?logout" class="hvr-grow-shadow"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>
 <div class="limiter">
