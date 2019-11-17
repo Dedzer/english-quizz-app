@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/admin.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+    <title>Tests</title>
+</head>
+<body>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> WebSiteName</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
+            class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</nav>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests" style="width: 1720px;">
+            <a role="button" class="w3-button w3-white w3-border w3-border-grey w3-round-large" style="font-size: 20px" th:href="@{/createtest}">Create test</a>
+            <table>
+                <thead>
+                <th>Title</th>
+                <th>Level</th>
+                <th>Type</th>
+                </thead>
+                <tbody>
+                <tr th:each="test : ${allTests}">
+                    <td style="margin: 10px; padding: 5px;" th:text="${test.getTitle()}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:text="${test.getLevel()}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:text="${test.getType()}"></td>
+                    <td style="margin: 10px; padding: 5px"><a role="button" title="Update Test!" th:href="@{/updatetest(id=${test.getId()})}"><i class="fas fa-edit"></i></a></td>
+                    <td style="margin: 10px; padding: 5px">
+                        <form th:action="@{/deletetest(id=${test.getId()})}"
+                              onsubmit="return confirm('Do you really want to delete the test? All tasks and questions also be deleted!');" method="post">
+                            <button  title="Delete Test!" value="delete"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </td>
+                    <td style="margin: 10px; padding: 5px;"><a role="button" th:href="@{/createtask(testId=${test.getId()})}" title="Create Task!" class="btn"><i class="fas fa-plus"></i></a></td>
+                    <td>
+                        <button class="btn btn-info btn-sm" data-toggle="collapse"
+                                th:attr="data-target='#showTasks'+${test.id}">Show test tasks</button>
+                        <table th:id="'showTasks' + ${test.id}" class="collapse">
+                            <thead>
+                            <th>Task</th>
+                            </thead>
+                            <tbody>
+                            <tr th:each="task : ${test.tasks}">
+                                <td style="margin: 10px; padding: 5px;" th:text="${task.getTask()}"></td>
+                                <td style="margin: 10px; padding: 5px"><a role="button" th:href="@{/updatetask(id=${task.getId()})}" title="Update Task!" class="btn"><i class="fas fa-edit"></i></a>
+                                </td>
+                                <td style="margin: 10px; padding: 5px">
+                                    <form th:action="@{/deletetask(id=${task.getId()})}"
+                                          onsubmit="return confirm('Do you really want to delete the task? All questions also be deleted!');" method="post">
+                                        <button value="delete" title="Delete Task!" ><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
+                                <td style="margin: 10px; padding: 5px;"><a role="button" title="Create Question!" th:href="@{/createquestion(taskId=${task.getId()})}" class="btn"><i class="fas fa-plus"></i></a>
+                                </td>
+                                <td style="margin: 10px; padding: 5px;">
+                                    <button class="btn btn-info btn-sm" th:attr="data-target='#showQuestions' + ${task.id}"
+                                            data-toggle="collapse">Show questions</button>
+                                    <table th:id="'showQuestions' + ${task.id}" class="collapse">
+                                        <thead>
+                                        <th>Question</th>
+                                        <th>Answer</th>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="question : ${task.questionsSet}">
+                                            <td style="margin: 10px; padding: 5px"
+                                                th:text="${question.getQuestion()}"></td>
+                                            <td style="margin: 10px; padding: 5px"
+                                                th:text="${question.getAnswer()}"></td>
+                                            <td style="margin: 10px; padding: 5px"><a role="button" title="Update Question!" th:href="@{/updatequestion(id=${question.getId()})}" class="btn"><i class="fas fa-edit"></i></a></td>
+                                            <td style="margin: 10px; padding: 5px">
+                                                <form th:action="@{/deletequestion(id=${question.getId()})}"
+                                                      onsubmit="return confirm('Do you really want to delete the question?');" method="post">
+                                                    <button value="delete" title="Delete Question!"><i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
+                                            <td style="margin: 10px; padding: 5px;"><a role="button" title="Create Option!" th:href="@{/createoption(questionId=${question.getId()})}" class="btn"><i class="fas fa-plus"></i></a></td>
+                                            <td style="margin: 10px; padding: 5px">
+                                                <button class="btn btn-info btn-sm" th:if="${question.optionsSet != null}"
+                                                        th:attr="data-target='#showOptions' + ${question.id}" data-toggle="collapse">Show options
+                                                </button>
+                                                <table th:id="'showOptions' + ${question.id}" class="collapse">
+                                                    <thead>
+                                                    <th>Option</th>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr th:each="option : ${question.optionsSet}">
+                                                        <td style="margin: 10px; padding: 5px"
+                                                            th:text="${option.getOption()}"></td>
+                                                        <td style="margin: 10px; padding: 5px"><a role="button" title="Update Option!" th:href="@{/updateoption(id=${option.getId()})}" class="btn">
+                                                            <i class="fas fa-edit"></i></a></td>
+                                                        <td style="margin: 10px; padding: 5px">
+                                                            <form th:action="@{/deleteoption(id=${option.getId()})}"
+                                                                  onsubmit="return confirm('Do you really want to delete the option?');" method="post">
+                                                                <button value="delete" title="Delete Option!" class="btn"><i class="fas fa-trash"></i></button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

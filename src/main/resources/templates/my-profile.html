@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta task="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/man-user.png"/>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+    <title>My profile</title>
+</head>
+<body>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> WebSiteName</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
+            class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</nav>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests">
+            <button class="btn btn-info" data-toggle="collapse" data-target="#showResult">Show My Results</button>
+            <table id="showResult" class="collapse">
+                <thead>
+                <th style="margin: 10px; padding: 5px;">Test</th>
+                <th style="margin: 10px; padding: 5px;">Result</th>
+                <th style="margin: 10px; padding: 5px;">Date</th>
+                </thead>
+                <tbody>
+                <tr th:each="userResult : ${userResultsList}">
+                    <td style="margin: 10px; padding: 5px;" th:text="${userResult.getTest().getTitle()}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAchievedPoints() + ' %'}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:text="${userResult.getAccomplishedDate()}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-warning" data-toggle="collapse" data-target="#changePassword">Change Password
+            </button>
+            <div id="changePassword" class="collapse">
+                <form th:action="@{/change-password}" th:object="${userToUpdate}" method="post">
+                    <div class="form-group">
+                        <label for="inputOldPassword">Old Password:</label>
+                        <input class="form-control" type="password" id="inputOldPassword"
+                               placeholder="Enter old password"
+                               th:required="required"
+                               task="oldPassword"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputNewPassword">New Password:</label>
+                        <input class="form-control" type="password" id="inputNewPassword"
+                               placeholder="Enter new password"
+                               th:required="required" task="password"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputConfirmPassword">Confirm New Password:</label>
+                        <input class="form-control" type="password" id="inputConfirmPassword"
+                               placeholder="Enter new password"
+                               th:required="required" task="confirmPassword"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <button data-toggle="collapse" data-target="#changeDetails" class="btn btn-warning">Change Details</button>
+                <div>
+                    <form id="changeDetails" class="collapse" th:action="@{/change-details}" th:object="${userToUpdate}" method="post">
+                        <input type="hidden" th:value="${getUser.getId()}" th:field="*{id}"/>
+                        <input type="hidden" th:value="${getUser.getPassword()}" th:field="*{password}"/>
+                        <input type="hidden" th:value="${getUser.getPassword()}" th:field="*{confirmPassword}"/>
+                        <input type="hidden" th:value="${getUser.getLogin()}" th:field="*{login}"/>
+                        <input type="hidden" th:value="${getUser.getUserDetails().getEmail()}" th:field="*{userDetails.email}"/>
+                        <div class="form-group">
+                            <label for="inputNewPassword">First Name:</label>
+                            <input class="form-control" type="text" id="firstName"
+                                   placeholder="Your name..."
+                                   th:required="required" th:flied="*{userDetails.firstName}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputConfirmPassword">Last Name:</label>
+                            <input class="form-control" type="text" id="lastName"
+                                   placeholder="Your last name..."
+                                   th:required="required" th:filed="*{userDetails.lastName}"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

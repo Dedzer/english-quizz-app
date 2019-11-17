@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" type="image/png" href="images/icons/admin.png"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+    <title>Admin page</title>
+</head>
+<body>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> WebSiteName</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
+            class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</nav>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests">
+            <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names.." id="myInput"
+                   onkeyup="myFunction()"/>
+            <table class="w3-table" id="myTable">
+                <thead>
+                <th>Login</th>
+                <th>Full Name</th>
+                <th>Results</th>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${allUsers}" th:if="${user.id != currentUserId}">
+                    <td style="margin: 10px; padding: 5px;" th:text="${user.login}" class="login"></td>
+                    <td style="margin: 10px; padding: 5px;"
+                        th:text="${user.userDetails.firstName + ' ' + user.userDetails.lastName}"></td>
+                    <td style="margin: 10px; padding: 5px;" th:text="${user.userDetails.email}"></td>
+                    <td>
+                        <button class="btn btn-info btn-xs" data-toggle="collapse"
+                                th:attr="data-target='#showResult'+${user.id}">Show
+                            User Results
+                        </button>
+                        <p class="collapse" th:if="${user.userResults.isEmpty()}">There is no results yet!</p>
+                        <table th:id="'showResult' + ${user.id}" class="collapse">
+                            <tbody>
+                            <tr th:each="userResult : ${user.userResults}">
+                                <td style="margin: 10px; padding: 5px;"
+                                    th:text="${userResult.getTest().getTitle()}"></td>
+                                <td style="margin: 10px; padding: 5px;"
+                                    th:text="${userResult.getAchievedPoints()} + ' %'"></td>
+                                <td style="margin: 10px; padding: 5px;"
+                                    th:text="${userResult.getAccomplishedDate()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <form th:if="${user.role == 'ROLE_USER'}" th:action="@{/addadmin}" th:object="${user}"
+                          method="post">
+                        <td><input type="hidden" name="id" th:value="${user.id}"/></td>
+                        <td><input type="hidden" name="role" th:value="${user.role}"/></td>
+                        <td>
+                            <button class="btn btn-warning" type="submit">Add Admin</button>
+                        </td>
+                    </form>
+                    <form th:if="${user.role == 'ROLE_ADMIN'}" th:action="@{/deleteadmin}" th:object="${user}"
+                          method="post">
+                        <td><input type="hidden" name="id" th:value="${user.id}"/></td>
+                        <td><input type="hidden" name="role" th:value="${user.role}"/></td>
+                        <td>
+                            <button class="btn btn-warning" type="submit">Delete Admin</button>
+                        </td>
+                    </form>
+                </tr>
+                </tbody>
+            </table>
+            <a class="w3-button w3-white w3-border w3-border-grey w3-round-large" style="font-size: 20px" role="button"
+               th:href="@{/admintestpage}">Show all tests</a>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+/*<![CDATA[*/
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+/*]]>*/
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

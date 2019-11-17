@@ -24,6 +24,18 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/updatequestion")
+                    .hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/createoption")
+                    .hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/updatequestion")
+                    .hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/createquestion")
+                    .hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/updatetask")
+                    .hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/createtask")
+                    .hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/admintestpage")
                     .hasAnyAuthority("ROLE_ADMIN")
                 .antMatchers("/updateTest")
@@ -56,7 +68,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login-process")
                 .defaultSuccessUrl("/index")
                 .and()
-                .logout().logoutSuccessUrl("/login");
+                .logout().logoutSuccessUrl("/login")
+                .and()
+                .rememberMe();
     }
 
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {

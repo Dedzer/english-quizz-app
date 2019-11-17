@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta task="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/form.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
+    <title>Update Question</title>
+</head>
+<body>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> WebSiteName</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
+            class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+    </div>
+</nav>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests">
+            <div class="container">
+                <form th:action="@{/updatequestion}" method="post" th:object="${questionToUpdate}">
+                    <input type="hidden" th:value="${questionToUpdate.getId()}" th:field="*{id}"/>
+                    <input type="hidden" th:value="${questionToUpdate.getTask()}" th:field="*{task}"/>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="question">Question</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="question" th:required="required" th:field="*{question}"
+                                   th:value="${questionToUpdate.getQuestion()}" placeholder="Question.."/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="answer">Answer</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="answer" th:required="required" th:field="*{answer}"
+                                   th:value="${questionToUpdate.getAnswer()}" placeholder="Answer.."/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
+</html>
