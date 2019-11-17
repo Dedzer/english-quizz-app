@@ -60,8 +60,25 @@ public class UserService {
         }
     }
 
+    public void changeDetails(UserDetails userDetails){
+        User user = getCurrentUser();
+        user.getUserDetails().setFirstName(userDetails.getFirstName());
+        user.getUserDetails().setLastName(userDetails.getLastName());
+        userRepository.save(user);
+    }
+
+    public void changeEmail(UserDetails userDetails){
+        User user = getCurrentUser();
+        user.getUserDetails().setEmail(userDetails.getEmail());
+        userRepository.save(user);
+    }
+
     public List<User> getAllUsers() {
         return userRepository.findAll();
+    }
+
+    public Long countUsers() {
+        return userRepository.count();
     }
 
     public void addAdmin(User user) {

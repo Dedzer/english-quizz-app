@@ -17,7 +17,7 @@ public class UserResults {
     @JoinColumn(name = "user_id")
     private User user;
     @Column(name = "achieved_points")
-    private Integer achievedPoints;
+    private Double achievedPoints;
     @Column(name = "accomplished_date")
     private Date accomplishedDate;
 
@@ -48,11 +48,11 @@ public class UserResults {
         this.user = user;
     }
 
-    public Integer getAchievedPoints() {
+    public Double getAchievedPoints() {
         return achievedPoints;
     }
 
-    public void setAchievedPoints(Integer achievedPoints) {
+    public void setAchievedPoints(Double achievedPoints) {
         this.achievedPoints = achievedPoints;
     }
 

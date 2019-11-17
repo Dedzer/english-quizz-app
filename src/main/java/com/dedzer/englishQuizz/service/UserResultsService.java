@@ -7,6 +7,8 @@ import com.dedzer.englishQuizz.repository.UserResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -40,26 +42,40 @@ public class UserResultsService {
         return userResult;
     }
 
-    public Integer achievedPoints(Long testId, Map<Long, Boolean> userResult) {
+    public Double achievedPoints(Long testId, Map<Long, Boolean> userResult) {
         int points = 0;
         for (Map.Entry<Long, Boolean> entry : userResult.entrySet()) {
             if (entry.getValue().equals(true)) {
                 points++;
             }
         }
-        saveResults(testId, points);
-        return points;
+        double result = ((double)points * 100 / (double)userResult.size());
+        double roundedResult = new BigDecimal(result).setScale(2, RoundingMode.UP).doubleValue();
+        saveResults(testId, roundedResult);
+        return roundedResult;
     }
 
-    public void saveResults(long testId, int points) {
+    public void saveResults(long testId, double result) {
         Timestamp stamp = new Timestamp(System.currentTimeMillis());
         Date date = new Date(stamp.getTime());
         UserResults userResults = new UserResults();
         userResults.setAccomplishedDate(date);
-        userResults.setAchievedPoints(points);
+        userResults.setAchievedPoints(result);
         userResults.setUser(userService.getCurrentUser());
         userResults.setTest(testService.getTestById(testId));
         userResultsRepository.save(userResults);
+    }
+
+    public Double averageOfUsersResults(){
+        List<UserResults> userResults = userResultsRepository.findAll();
+        double sum = 0;
+        if(!userResults.isEmpty()){
+            for (UserResults result : userResults){
+                sum += result.getAchievedPoints();
+            }
+            return new BigDecimal(sum / userResults.size()).setScale(2, RoundingMode.UP).doubleValue();
+        }
+        return sum;
     }
 
     public List<UserResults> getUserResultsByCurrentUserId() {
