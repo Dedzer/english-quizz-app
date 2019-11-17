@@ -52,14 +52,19 @@ public class UserService {
         }
     }
 
-    public void changePassword(User user, String oldPassword) {
-        if (user.getPassword().equals(user.getConfirmPassword())) {
-            userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
-        }
+    public void changePassword(User user) {
+        userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
     }
 
-    public boolean oldPasswordValidation(User user, String oldPassword) {
+    public boolean oldPasswordValidation(String oldPassword) {
         return bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword());
+    }
+
+    public boolean passwordMatchersValidation(User user) {
+        if (user.getPassword().equals(user.getConfirmPassword())) {
+            return true;
+        }
+        return false;
     }
 
     public void changeDetails(UserDetails userDetails) {
