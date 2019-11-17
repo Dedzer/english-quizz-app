@@ -40,4 +40,8 @@ public class TestService {
     public void deleteTest(Long id){
         testRepository.delete(id);
     }
+
+    public Long countTests(){
+        return testRepository.count();
+    }
 }
