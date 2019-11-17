@@ -53,21 +53,23 @@ public class UserService {
     }
 
     public void changePassword(User user, String oldPassword) {
-        if (bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword())) {
-            if (user.getPassword().equals(user.getConfirmPassword())) {
-                userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
-            }
+        if (user.getPassword().equals(user.getConfirmPassword())) {
+            userRepository.updatePassword(bCryptPasswordEncoder.encode(user.getPassword()), getCurrentUser().getId());
         }
     }
 
-    public void changeDetails(UserDetails userDetails){
+    public boolean oldPasswordValidation(User user, String oldPassword) {
+        return bCryptPasswordEncoder.matches(oldPassword, getCurrentUser().getPassword());
+    }
+
+    public void changeDetails(UserDetails userDetails) {
         User user = getCurrentUser();
         user.getUserDetails().setFirstName(userDetails.getFirstName());
         user.getUserDetails().setLastName(userDetails.getLastName());
         userRepository.save(user);
     }
 
-    public void changeEmail(UserDetails userDetails){
+    public void changeEmail(UserDetails userDetails) {
         User user = getCurrentUser();
         user.getUserDetails().setEmail(userDetails.getEmail());
         userRepository.save(user);

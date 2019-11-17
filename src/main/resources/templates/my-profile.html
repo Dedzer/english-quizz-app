@@ -167,6 +167,9 @@
                             <input type="password" id="inputConfirmPassword" placeholder="Enter new password" th:required="required" th:field="*{confirmPassword}"/>
                         </div>
                     </div>
+                    <div class="alert alert-warning" th:if="${passError != null}">
+                        <p th:text="${passError}"></p>
+                    </div>
                     <div class="row">
                         <input type="submit" value="Save Changes"/>
                     </div>

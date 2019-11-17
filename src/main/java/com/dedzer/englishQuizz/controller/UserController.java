@@ -61,9 +61,13 @@ public class UserController {
     }
 
     @PostMapping("/updatepassword")
-    public ModelAndView changePassword(@ModelAttribute User user, @ModelAttribute("oldPassword") String oldPassword){
-        ModelAndView modelAndView = new ModelAndView("my-profile");
-        userService.changePassword(user, oldPassword);
+    public ModelAndView changePassword(@ModelAttribute User user, @ModelAttribute("oldPassword") String oldPassword, RedirectAttributes redirectAttributes){
+        ModelAndView modelAndView = new ModelAndView("redirect:myprofile");
+        if(userService.oldPasswordValidation(user, oldPassword)){
+            userService.changePassword(user, oldPassword);
+        } else {
+            redirectAttributes.addFlashAttribute("passError", "Old password in not right!");
+        }
         return modelAndView;
     }
 
