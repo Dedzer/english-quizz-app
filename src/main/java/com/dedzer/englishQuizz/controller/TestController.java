@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
 
@@ -48,6 +49,7 @@ public class TestController {
         modelAndView.addObject("achievedPoints", userResultsService.achievedPoints(userAnswers.getTestId(), resultMap));
         modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         modelAndView.addObject("getTestId", userAnswers.getTestId());
+        modelAndView.addObject("userAnswer", userAnswers.getAnswer());
         return modelAndView;
     }
 
@@ -63,37 +65,42 @@ public class TestController {
 
     @GetMapping("/createtest")
     public ModelAndView createTestPage(){
-        ModelAndView modelAndView = new ModelAndView("createtest");
+        ModelAndView modelAndView = new ModelAndView("create-test");
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         modelAndView.addObject("test", new Test());
         return modelAndView;
     }
     @PostMapping("/createtest")
-    public ModelAndView createTest(@ModelAttribute Test test){
+    public ModelAndView createTest(@ModelAttribute Test test, RedirectAttributes attributes){
         ModelAndView modelAndView = new ModelAndView("redirect:admintestpage");
         if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
             testService.saveTest(test);
+            attributes.addFlashAttribute("message", "Test was successfully added!");
         }
         return modelAndView;
     }
 
     @GetMapping("/updatetest")
     public ModelAndView updateTest(@RequestParam Long id) {
-        ModelAndView modelAndView = new ModelAndView("updateTest");
+        ModelAndView modelAndView = new ModelAndView("update-test");
+        modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
         modelAndView.addObject("test", testService.getTestById(id));
         return modelAndView;
     }
     @PostMapping("/updatetest")
-    public ModelAndView updateTest(@ModelAttribute Test test){
+    public ModelAndView updateTest(@ModelAttribute Test test, RedirectAttributes attributes){
         ModelAndView modelAndView = new ModelAndView("redirect:admintestpage");
         if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
             testService.updateTest(test);
+            attributes.addFlashAttribute("message", "Test was successfully updated!");
         }
         return modelAndView;
     }
     @PostMapping("/deletetest")
-    public String deleteTest(@RequestParam Long id){
+    public String deleteTest(@RequestParam Long id, RedirectAttributes attributes){
         if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
             testService.deleteTest(id);
+            attributes.addFlashAttribute("message", "Test was successfully deleted!");
         }
         return "redirect:admintestpage";
     }

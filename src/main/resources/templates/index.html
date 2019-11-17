@@ -4,36 +4,77 @@
 <head>
     <meta charset="utf-8"/>
     <meta task="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/util.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css"/>
     <title></title>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/index">WebSiteName</a>
-        </div>
-        <ul class="nav navbar-nav">
-            <li th:if="${getUserRole == 'ROLE_ADMIN'}" class="active"><a href="/adminpage">Admin Page</a></li>
-            <li><a href="/myprofile">My Profile</a></li>
-            <li><a href="/tests">Tests</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/login?logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-        </ul>
+<nav class="topnav">
+    <a class="header hvr-underline-from-center" href="/index"><i class="fas fa-home"></i> Quiz Your English</a>
+    <a th:if="${getUserRole == 'ROLE_ADMIN'}" class="hvr-underline-from-center" href="/adminpage"><i
+            class="fas fa-user-shield"></i> Admin Page</a>
+    <a href="/myprofile" class="hvr-underline-from-center"><i class="fas fa-user"></i> My Profile</a>
+    <a href="/tests" class="hvr-underline-from-center"><i class="fas fa-book-open"></i> Tests</a>
+    <div class="topnav-right">
+        <a href="/login?logout" class="hvr-grow-shadow"><i class="fas fa-sign-out-alt"></i> Logout</a>
     </div>
 </nav>
-<div class="container">
-    <div class="jumbotron">
-        <h1 class="display-4">Hello, world!</h1>
-        <p class="lead">How strong is your English knowledge?</p>
-        <hr class="my-4"/>
-        <p>Practice your English skills with our English basics free quizzes.</p>
-        <a class="btn btn-primary btn-lg" href="/tests" role="button">Get started</a>
+<div class="limiter">
+    <div class="container-tests">
+        <div class="wrap-tests">
+            <main role="main">
+                <section class="jumbotron text-center">
+                    <div class="container">
+                        <h1 class="jumbotron-heading">Quiz your English!</h1>
+                        <p class="lead text-muted">How strong is your English knowledge? Practice your English skills with our English basics free quizzes.</p>
+                        <p><a href="/tests" class="btn btn-primary my-2">Check our tests!</a></p>
+                    </div>
+                </section>
+                <div class="album py-5 bg-light">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <div style="wight: 100%; height: 250px; background-image: url('images/undraw_user_flow_vr6w.svg'); background-size: 350px, 300px; background-repeat: no-repeat;">
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">Total tests were added, but that's not all:<p style="text-align: center;" th:text="${TestsCount}"></p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <div style="wight: 100%; height: 250px; background-image: url('images/undraw_Mobile_app_p3ts.svg'); background-size: 310px, 200px; background-repeat: no-repeat;">
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">Users who have already signed up:<p style="text-align: center;" th:text="${UsersCount}"></p></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <div style="wight: 100%; height: 250px; background-image: url('images/undraw_terms_lso0.svg'); background-size: 190px, 300px; background-repeat: no-repeat; background-position: center;">
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text">The average result of our users. And you can do better?<p style="text-align: center;" th:text="${AverageResults + ' %'}"></p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/1f6ee6e8e6.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

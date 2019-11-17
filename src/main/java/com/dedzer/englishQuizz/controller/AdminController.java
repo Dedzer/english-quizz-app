@@ -23,7 +23,7 @@ public class AdminController {
     public ModelAndView adminPage() {
         ModelAndView modelAndView;
         if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")) {
-            modelAndView = new ModelAndView("adminpage");
+            modelAndView = new ModelAndView("admin-page");
             modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
             modelAndView.addObject("allUsers", userService.getAllUsers());
             modelAndView.addObject("currentUserId", userService.getCurrentUser().getId());
@@ -49,7 +49,8 @@ public class AdminController {
     public ModelAndView allTests(){
         ModelAndView modelAndView;
         if(userService.getCurrentUser().getRole().equals("ROLE_ADMIN")){
-            modelAndView = new ModelAndView("allTestsForAdmin");
+            modelAndView = new ModelAndView("all-tests-for-admin");
+            modelAndView.addObject("getUserRole", userService.getCurrentUser().getRole());
             modelAndView.addObject("allTests", testService.getAllTests());
         } else {
             modelAndView = new ModelAndView("redirect:index");
